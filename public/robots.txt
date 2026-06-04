@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ajam.univ-ouargla.dz/sitemap-index.xml
+Sitemap: https://sawat80.github.io/ajam/sitemap-index.xml
