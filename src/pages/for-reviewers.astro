@@ -1,0 +1,327 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { journal, ojs, contact } from '../data/site';
+---
+
+<Base
+  title="For Reviewers"
+  description="Guidelines for peer reviewers of the Algerian Journal of Applied Mathematics — review criteria, process, confidentiality, and how to write a constructive report."
+>
+  <PageHeader
+    eyebrow="Peer review"
+    title="For Reviewers"
+    subtitle="Expert peer review is the foundation of scientific integrity. AJAM is grateful to every reviewer who donates their time and expertise to uphold the quality of applied mathematics research."
+  />
+
+  <!-- ─────────────────────────── Introduction & CTAs ─────────────────────────── -->
+  <section class="section">
+    <div class="container prose">
+
+      <p class="lead">
+        The <em>{journal.title}</em> operates a rigorous <strong>double-blind peer review</strong>
+        process in which neither authors nor reviewers know each other's identities. Reviewers are
+        the backbone of AJAM's quality assurance: your expert judgement ensures that only
+        scientifically sound, original, and clearly presented work reaches our readership.
+        We sincerely thank every colleague who contributes to this mission.
+      </p>
+
+      <div class="cta-row">
+        <a href={ojs.login} class="btn btn--primary">Reviewer login</a>
+        <a href={ojs.register} class="btn btn--gold">Register as a reviewer</a>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- ─────────────────── What we ask you to evaluate ─────────────────── -->
+      <h2>What We Ask You to Evaluate</h2>
+      <p>
+        When assessing a submission, reviewers should address the following dimensions.
+        Not every criterion will be equally relevant to every paper — use your judgement
+        and indicate clearly which aspects most influenced your recommendation.
+      </p>
+
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="grid grid--3">
+
+        <div class="card card--accent">
+          <p class="criterion-icon">★</p>
+          <h3 class="criterion-title">Originality &amp; Significance</h3>
+          <p class="muted">
+            Does the work make a genuine new contribution? Is the result, method, or
+            application meaningful to the applied mathematics community?
+          </p>
+        </div>
+
+        <div class="card card--accent">
+          <p class="criterion-icon">∑</p>
+          <h3 class="criterion-title">Mathematical Correctness &amp; Rigour</h3>
+          <p class="muted">
+            Are proofs, derivations, and computations technically sound? Are assumptions
+            clearly stated and conclusions appropriately bounded?
+          </p>
+        </div>
+
+        <div class="card card--accent">
+          <p class="criterion-icon">¶</p>
+          <h3 class="criterion-title">Clarity &amp; Structure</h3>
+          <p class="muted">
+            Is the paper well-organised, with a clear problem statement, methodology,
+            results, and discussion? Is the writing precise and accessible?
+          </p>
+        </div>
+
+        <div class="card card--accent">
+          <p class="criterion-icon">⟳</p>
+          <h3 class="criterion-title">Reproducibility of Computations</h3>
+          <p class="muted">
+            Are numerical experiments, algorithms, or simulations described with
+            sufficient detail for independent replication?
+          </p>
+        </div>
+
+        <div class="card card--accent">
+          <p class="criterion-icon">📚</p>
+          <h3 class="criterion-title">Appropriate References</h3>
+          <p class="muted">
+            Is the literature review adequate? Are key prior results cited correctly?
+            Are citations relevant and properly formatted?
+          </p>
+        </div>
+
+        <div class="card card--accent">
+          <p class="criterion-icon">⊂</p>
+          <h3 class="criterion-title">Scope Fit</h3>
+          <p class="muted">
+            Does the manuscript fall within the aims and scope of AJAM? Would its
+            subject matter and level be of interest to our readership?
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────── Review process & confidentiality ─────────────────── -->
+  <section class="section">
+    <div class="container prose">
+
+      <h2>Review Process &amp; Confidentiality</h2>
+
+      <p>
+        AJAM uses <strong>double-blind peer review</strong>: author identities are hidden from
+        reviewers, and reviewer identities are hidden from authors throughout the evaluation process.
+        This model reduces bias and protects the independence of scholarly judgement.
+      </p>
+
+      <p>Reviewers are expected to observe the following obligations:</p>
+
+      <ul>
+        <li>
+          <strong>No contact with authors.</strong> Do not attempt to identify or contact the
+          authors of a manuscript assigned to you. All communication must pass through the
+          editorial system.
+        </li>
+        <li>
+          <strong>Strict confidentiality.</strong> Manuscripts under review are confidential
+          documents. Do not share, cite, or discuss them — in whole or in part — with any
+          third party without explicit written permission from the Editor-in-Chief.
+        </li>
+        <li>
+          <strong>Conflict of interest declaration.</strong> If you recognise the authors, have
+          a competing interest, or feel unable to provide an impartial assessment for any reason,
+          please decline the review immediately via the OJS system and notify the handling editor.
+        </li>
+        <li>
+          <strong>No AI-assisted processing of manuscripts.</strong> Do not upload or paste
+          manuscript content into external AI tools (e.g. large language model chatbots).
+          Doing so would violate the authors' confidentiality rights and may constitute a
+          serious breach of research ethics.
+        </li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- ─────────────────── Recommendation categories ─────────────────── -->
+      <h2>Recommendation Categories</h2>
+      <p>
+        After completing your review, select one of the following recommendations in the
+        OJS submission system. Please ensure your written report justifies the choice.
+      </p>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Recommendation</th>
+            <th>Guidance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tag tag--accept">Accept</span></td>
+            <td>
+              The manuscript is ready for publication as submitted, or requires only
+              trivial copy-editing.
+            </td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--minor">Minor revisions</span></td>
+            <td>
+              The work is fundamentally sound but needs small corrections — typos,
+              notation, minor clarifications — that can be verified by the editor.
+            </td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--major">Major revisions</span></td>
+            <td>
+              The paper has merit but requires substantial reworking — additional proofs,
+              experiments, or restructuring — before it can be accepted.
+            </td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--reject">Reject</span></td>
+            <td>
+              Fundamental flaws (incorrect results, out of scope, insufficient originality)
+              that cannot be remedied by revision.
+            </td>
+          </tr>
+          <tr>
+            <td><span class="tag tag--elsewhere">Resubmit elsewhere</span></td>
+            <td>
+              The manuscript is outside AJAM's scope but may be suitable for a different
+              venue; recommend a more appropriate journal if possible.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="divider"></div>
+
+      <!-- ─────────────────── Writing a constructive report ─────────────────── -->
+      <h2>Writing a Constructive Report</h2>
+      <p>
+        A high-quality review is specific, balanced, and actionable. The following tips
+        will help you structure feedback that is genuinely useful to authors and editors alike.
+      </p>
+
+      <ul>
+        <li>
+          <strong>Be specific.</strong> Reference exact sections, equations, or line numbers
+          when raising a concern. Vague comments such as "the proof is unclear" are
+          difficult for authors to act upon.
+        </li>
+        <li>
+          <strong>Separate major from minor points.</strong> Clearly distinguish issues that
+          affect the validity or significance of the work from those that are presentational
+          or stylistic.
+        </li>
+        <li>
+          <strong>Maintain a courteous, professional tone.</strong> Critique the work, not
+          the authors. Avoid dismissive or condescending language regardless of your
+          assessment of the manuscript's quality.
+        </li>
+        <li>
+          <strong>Justify your recommendation.</strong> Your summary recommendation should
+          follow logically from the points raised in your report. If you recommend rejection,
+          explain concisely why revision cannot address the fundamental deficiencies.
+        </li>
+        <li>
+          <strong>Suggest references judiciously.</strong> You may recommend additional
+          literature that would strengthen the paper's context or rigour. Do not use the
+          review process to promote your own work; unsolicited self-citation recommendations
+          are considered a conflict of interest.
+        </li>
+      </ul>
+
+      <div class="divider"></div>
+
+      <!-- ─────────────────── Timeline ─────────────────── -->
+      <h2>Timeline</h2>
+
+      <div class="notice">
+        <p>
+          <strong>Requested review period: 3–4 weeks</strong> from the date of invitation
+          acceptance. We recognise that academic schedules vary — if you require an extension,
+          please contact the editorial office as early as possible at
+          <a href={`mailto:${contact.editorialEmail}`}>{contact.editorialEmail}</a> so
+          that we may plan accordingly and avoid undue delays for authors.
+        </p>
+        <p>
+          If you are unable to complete the review within an agreed timeframe, kindly notify
+          us promptly so the manuscript can be reassigned without further delay.
+        </p>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- ─────────────────── Recognition ─────────────────── -->
+      <h2>Recognition</h2>
+
+      <p>
+        AJAM acknowledges the invaluable contribution of its reviewers.
+        All peer reviewers who complete at least one review in a given calendar year are
+        recognised in the annual <em>Acknowledgement of Reviewers</em> published in the
+        December issue and on this website.
+      </p>
+
+      <p>
+        Reviewers may also claim verifiable credit for their service through their OJS
+        reviewer records, which can be exported and cited in academic portfolios, grant
+        applications, and professional evaluations. To access your review history, log in
+        to the submission system and navigate to your reviewer profile.
+      </p>
+
+      <div class="center">
+        <a href={ojs.login} class="btn btn--primary">Access your reviewer dashboard</a>
+      </div>
+
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* CTA button row */
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1.75rem 0;
+  }
+
+  /* Evaluation criterion cards */
+  .criterion-icon {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+    line-height: 1;
+  }
+
+  .criterion-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Recommendation tags */
+  .tag--accept   { background: #d1fae5; color: #065f46; }
+  .tag--minor    { background: #dbeafe; color: #1e3a8a; }
+  .tag--major    { background: #fef3c7; color: #92400e; }
+  .tag--reject   { background: #fee2e2; color: #7f1d1d; }
+  .tag--elsewhere { background: #ede9fe; color: #4c1d95; }
+
+  .tag--accept,
+  .tag--minor,
+  .tag--major,
+  .tag--reject,
+  .tag--elsewhere {
+    display: inline-block;
+    padding: 0.2em 0.65em;
+    border-radius: 0.25rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+</style>

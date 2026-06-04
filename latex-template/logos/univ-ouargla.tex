@@ -1,0 +1,23 @@
+%% Placeholder emblem for Kasdi Merbah University, Ouargla.
+%% Compile with pdflatex to produce univ-ouargla.pdf.
+%% >>> Replace univ-ouargla.pdf with the OFFICIAL university logo
+%%     (PDF preferred, or PNG named univ-ouargla.png) before publishing. <<<
+\documentclass[border=3pt]{standalone}
+\usepackage{lmodern}
+\usepackage{tikz}
+\definecolor{g}{HTML}{14543F}
+\definecolor{gold}{HTML}{B9892F}
+\begin{document}
+\begin{tikzpicture}
+  % roundel
+  \fill[gold] (0,0) circle (1.55cm);
+  \fill[g]    (0,0) circle (1.40cm);
+  \draw[gold,line width=1pt] (0,0) circle (1.20cm);
+  % monogram
+  \node[white,font=\bfseries\fontsize{30}{30}\selectfont] at (0,0.15) {UKM};
+  % ring text (straight approximation)
+  \node[white,font=\fontsize{6.2}{6.2}\selectfont\bfseries] at (0,0.92) {KASDI MERBAH UNIVERSITY};
+  \node[gold,font=\bfseries\fontsize{9}{9}\selectfont]      at (0,-0.62) {OUARGLA};
+  \node[white,font=\fontsize{6}{6}\selectfont]              at (0,-0.95) {ALGERIA};
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,442 @@
+%% ===============================================================
+%%  Algerian Journal of Applied Mathematics (AJAM)
+%%  Author manuscript template — worked sample paper
+%%
+%%  Compile (terminal):   pdflatex ajam-template
+%%                        bibtex   ajam-template
+%%                        pdflatex ajam-template
+%%                        pdflatex ajam-template
+%%  Or upload the whole folder to Overleaf and select pdfLaTeX.
+%%
+%%  This file is a *realistic, self-contained* example showing how a
+%%  typical AJAM article looks (numerical analysis of a fractional PDE).
+%%  Replace its content with your own. The figure is drawn with pgfplots
+%%  so no external image file is needed.
+%%
+%%  DOUBLE-BLIND REVIEW: for initial submission, comment out author
+%%  names/affiliations, \corresponding, and the Acknowledgements, and
+%%  upload an anonymised PDF plus a separate title page (see README).
+%% ===============================================================
+\documentclass[11pt]{ajam}
+
+% Extra packages used by this sample (load after the class)
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% ---- Journal metadata (set by the editorial office; keep defaults) ----
+\journalvolume{1}
+\journalissue{1}
+\journalyear{2026}
+\journalpages{1--16}
+% \articledoi{10.XXXXX/ajam.v1i1.001}   % assigned on acceptance
+\received{1 March 2026}
+\revised{15 April 2026}
+\accepted{2 May 2026}
+% \published{...}
+
+% ---- Title & running heads ----
+\title{A Linearized $L1$ Finite Difference Scheme for the\\
+       Time-Fractional Diffusion Equation:\\
+       Stability and Convergence}
+\shorttitle{An $L1$ Scheme for Time-Fractional Diffusion}
+\shortauthors{A.~Author, B.~Coauthor}
+
+% ---- Authors & affiliations ----
+\author[1]{First A. Author}
+\author[1,2]{Second B. Coauthor}
+\affil[1]{Laboratory of Applied Mathematics, Kasdi Merbah University, Ouargla, Algeria}
+\affil[2]{Department of Mathematics, Partner University, City, Country}
+
+% ---- Front-matter metadata ----
+\keywords{time-fractional diffusion, Caputo derivative, $L1$ scheme,
+          stability, convergence order}
+\subjclass{Primary 65M06, 65M12; Secondary 35R11, 26A33}
+\corresponding{first.author@univ-ouargla.dz}
+
+% Local notation
+\newcommand{\dtt}{{}^{C}\!D_t^{\alpha}}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\Gam}{\Gamma}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We study a fully discrete finite difference method for the one-dimensional
+time-fractional diffusion equation with a Caputo derivative of order
+$\alpha\in(0,1)$. The Caputo derivative is discretized by the classical
+$L1$ formula on a uniform mesh, while the spatial operator is approximated
+by the standard second-order central difference. We prove that the
+resulting scheme is unconditionally stable in the discrete $L^2$ norm by a
+discrete energy argument that exploits the monotonicity of the $L1$
+weights, and we establish an a~priori error bound of order
+$\mathcal{O}(\tau^{2-\alpha}+h^2)$, where $\tau$ and $h$ denote the temporal
+and spatial step sizes. Two numerical experiments with manufactured
+solutions confirm the theoretical convergence rates and illustrate the
+behaviour of the scheme as $\alpha$ varies. The analysis is elementary and
+self-contained, requiring only the discrete maximum principle and standard
+summation-by-parts identities.
+\end{abstract}
+
+% ===============================================================
+\section{Introduction}\label{sec:intro}
+Fractional-order diffusion models have become a standard tool for
+describing anomalous transport in heterogeneous media, viscoelastic
+materials, and biological tissues, where the mean-squared displacement
+grows sublinearly in time \citep{Podlubny1999,KilbasSrivastavaTrujillo2006}.
+In this work we consider the time-fractional diffusion equation
+\begin{equation}\label{eq:pde}
+  \dtt u(x,t) - u_{xx}(x,t) = f(x,t),
+  \qquad (x,t)\in(0,L)\times(0,T],
+\end{equation}
+subject to the initial and boundary conditions
+\begin{equation}\label{eq:bc}
+  u(x,0)=u_0(x),\quad x\in[0,L],
+  \qquad u(0,t)=u(L,t)=0,\quad t\in[0,T],
+\end{equation}
+where $0<\alpha<1$ and $\dtt$ denotes the Caputo fractional derivative
+\begin{equation}\label{eq:caputo}
+  \dtt u(x,t) = \frac{1}{\Gam(1-\alpha)}\int_{0}^{t}
+  \frac{\partial u(x,s)}{\partial s}\,(t-s)^{-\alpha}\,\mathrm{d}s .
+\end{equation}
+
+Since closed-form solutions of \eqref{eq:pde}--\eqref{eq:bc} are rarely
+available, accurate and provably stable numerical schemes are essential.
+The $L1$ approximation of the Caputo derivative, introduced for such
+problems by \citet{LinXu2007} and analysed extensively in
+\citep{SunWu2006,StynesORiordanGracia2017}, remains one of the most widely
+used discretizations because of its robustness and ease of implementation;
+see the survey \citep{JinLazarovZhou2019} for an overview, and
+\citep{Alikhanov2015,GaoSunZhang2014} for higher-order alternatives.
+
+The purpose of this paper is to give a concise, self-contained stability
+and convergence analysis of the standard $L1$/central-difference scheme for
+\eqref{eq:pde}. Our contributions are threefold:
+\begin{enumerate}[label=(\roman*),leftmargin=2.2em]
+  \item we establish \emph{unconditional} stability in the discrete $L^2$
+        norm (\Cref{thm:stability}) using only the monotonicity of the $L1$
+        weights;
+  \item we prove an optimal error estimate of order
+        $\mathcal{O}(\tau^{2-\alpha}+h^{2})$ for solutions that are
+        sufficiently smooth in time (\Cref{thm:convergence});
+  \item we validate the theory with two manufactured-solution experiments
+        (\Cref{sec:numerics}).
+\end{enumerate}
+
+The remainder of the paper is organised as follows. \Cref{sec:prelim} fixes
+notation and recalls properties of the $L1$ weights. \Cref{sec:scheme}
+derives the fully discrete scheme. \Cref{sec:stability} and
+\Cref{sec:convergence} contain the stability and convergence analysis,
+respectively. Numerical results are reported in \Cref{sec:numerics}, and
+\Cref{sec:conclusion} concludes.
+
+% ===============================================================
+\section{Preliminaries and notation}\label{sec:prelim}
+For a positive integer $M$ let $h=L/M$ and $x_i=ih$, $0\le i\le M$; for a
+positive integer $N$ let $\tau=T/N$ and $t_n=n\tau$, $0\le n\le N$. We write
+$U_i^n$ for the numerical approximation of $u(x_i,t_n)$ and use the discrete
+inner product and norm
+\begin{equation}\label{eq:disc-norm}
+  (U,V) = h\sum_{i=1}^{M-1} U_i V_i,
+  \qquad \norm{U} = (U,U)^{1/2},
+\end{equation}
+for grid functions vanishing at $i=0,M$. The second-order central
+difference operator is
+\begin{equation}\label{eq:laplace}
+  \delta_x^2 U_i^n = \frac{U_{i-1}^n - 2U_i^n + U_{i+1}^n}{h^2}.
+\end{equation}
+
+The $L1$ approximation of \eqref{eq:caputo} at $t=t_n$ reads
+\begin{equation}\label{eq:L1}
+  \dtt u(x_i,t_n) \approx \mu \sum_{k=0}^{n-1} b_k
+  \bigl(U_i^{\,n-k} - U_i^{\,n-k-1}\bigr),
+  \qquad
+  \mu := \frac{\tau^{-\alpha}}{\Gam(2-\alpha)},
+\end{equation}
+with weights
+\begin{equation}\label{eq:weights}
+  b_k = (k+1)^{1-\alpha} - k^{1-\alpha}, \qquad k\ge 0 .
+\end{equation}
+The following elementary properties are the only structural facts used
+below.
+
+\begin{lemma}\label{lem:weights}
+For $0<\alpha<1$ the weights \eqref{eq:weights} satisfy
+\begin{equation}
+  1 = b_0 > b_1 > b_2 > \cdots > 0,
+  \qquad b_k \to 0,
+  \qquad \sum_{k=0}^{n-1} b_k = n^{1-\alpha}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The map $s\mapsto s^{1-\alpha}$ is strictly increasing and strictly concave
+on $[0,\infty)$ because $0<1-\alpha<1$. Concavity gives
+$b_{k}=(k+1)^{1-\alpha}-k^{1-\alpha} > (k+2)^{1-\alpha}-(k+1)^{1-\alpha}=b_{k+1}>0$,
+which yields the monotonicity and positivity; $b_0=1$ is immediate. The sum
+telescopes to $n^{1-\alpha}$, and $b_k\to0$ follows from the mean value
+theorem since $b_k=(1-\alpha)\xi_k^{-\alpha}$ for some $\xi_k\in(k,k+1)$.
+\end{proof}
+
+% ===============================================================
+\section{The finite difference scheme}\label{sec:scheme}
+Replacing the Caputo derivative in \eqref{eq:pde} by the $L1$ formula
+\eqref{eq:L1} and the spatial derivative by \eqref{eq:laplace}, and
+collocating at the interior nodes $(x_i,t_n)$, we obtain the fully discrete
+scheme: find $\{U_i^n\}$ such that
+\begin{equation}\label{eq:scheme}
+  \mu\sum_{k=0}^{n-1} b_k\bigl(U_i^{\,n-k}-U_i^{\,n-k-1}\bigr)
+  - \delta_x^2 U_i^n = f_i^n,
+  \qquad 1\le i\le M-1,\ 1\le n\le N,
+\end{equation}
+together with $U_i^0=u_0(x_i)$ and $U_0^n=U_M^n=0$, where
+$f_i^n=f(x_i,t_n)$.
+
+Isolating the $n$-th level terms, \eqref{eq:scheme} can be written in the
+one-step form
+\begin{equation}\label{eq:onestep}
+  \mu\,U_i^n - \delta_x^2 U_i^n
+  = \mu\sum_{k=1}^{n-1}(b_{k-1}-b_k)\,U_i^{\,n-k}
+   + \mu\,b_{n-1}\,U_i^0 + f_i^n .
+\end{equation}
+In matrix form, with $U^n=(U_1^n,\dots,U_{M-1}^n)^{\!\top}$ and the
+symmetric positive-definite tridiagonal matrix
+$A=\mathrm{tridiag}(-1,2,-1)/h^2$, scheme \eqref{eq:onestep} reads
+$(\mu I + A)\,U^n = F^n$, where the right-hand side $F^n$ collects the
+history terms. Because $\mu>0$ and $A$ is positive definite, the system
+matrix $\mu I + A$ is an $M$-matrix; hence \eqref{eq:scheme} is uniquely
+solvable at every time level and admits a discrete maximum principle.
+
+% ===============================================================
+\section{Stability}\label{sec:stability}
+We first record a discrete coercivity identity.
+
+\begin{lemma}\label{lem:coercive}
+For any grid function $V$ vanishing at $i=0,M$ one has
+$-(\delta_x^2 V, V) = \norm{\delta_x V}^2 \ge 0$, where
+$\delta_x V_i=(V_i-V_{i-1})/h$.
+\end{lemma}
+
+\begin{proof}
+Summation by parts on \eqref{eq:disc-norm}, using $V_0=V_M=0$, gives the
+stated identity; nonnegativity is clear.
+\end{proof}
+
+\begin{theorem}[Unconditional stability]\label{thm:stability}
+Let $\{U^n\}_{n=0}^N$ solve \eqref{eq:scheme}. Then for every
+$1\le n\le N$,
+\begin{equation}\label{eq:stab-bound}
+  \norm{U^n} \le \norm{U^0}
+  + \Gam(2-\alpha)\,t_n^{\alpha}\,\max_{1\le k\le n}\norm{f^k}.
+\end{equation}
+In particular the scheme is stable for any choice of $\tau$ and $h$.
+\end{theorem}
+
+\begin{proof}
+Take the discrete inner product of \eqref{eq:scheme} with $U^n$. By
+\Cref{lem:coercive} the diffusion term is nonnegative, hence
+\begin{equation}\label{eq:stab1}
+  \mu\sum_{k=0}^{n-1} b_k\bigl(U^{\,n-k}-U^{\,n-k-1},\,U^n\bigr)
+  \le \bigl(f^n,U^n\bigr) \le \norm{f^n}\,\norm{U^n}.
+\end{equation}
+Using $b_0=1$ and the Cauchy--Schwarz inequality together with the
+monotonicity from \Cref{lem:weights}, the left-hand side is bounded below by
+\begin{equation}
+  \mu\Bigl(\norm{U^n}
+  - \sum_{k=1}^{n-1}(b_{k-1}-b_k)\norm{U^{\,n-k}}
+  - b_{n-1}\norm{U^0}\Bigr)\norm{U^n}.
+\end{equation}
+Dividing by $\norm{U^n}$ and setting
+$E^n:=\max_{0\le k\le n}\norm{U^k}$, the telescoping coefficients sum to
+$b_0=1$, giving $\mu\,\norm{U^n}\le \mu\,E^{n-1}+\norm{f^n}$, that is
+$\norm{U^n}\le E^{n-1}+\mu^{-1}\norm{f^n}$. Induction on $n$ and
+$\mu^{-1}=\Gam(2-\alpha)\tau^{\alpha}\le \Gam(2-\alpha)t_n^{\alpha}$ yield
+\eqref{eq:stab-bound}.
+\end{proof}
+
+% ===============================================================
+\section{Convergence}\label{sec:convergence}
+Let $e_i^n=u(x_i,t_n)-U_i^n$ denote the error. We assume the regularity
+\begin{equation}\label{eq:reg}
+  \bigl\lVert \partial_t^{2} u(\cdot,t)\bigr\rVert_{\infty}\le C\,t^{\alpha-1},
+  \qquad u(\cdot,t)\in C^4([0,L]),
+\end{equation}
+which is typical of solutions to \eqref{eq:pde}; see
+\citep{StynesORiordanGracia2017,JinLazarovZhou2019}.
+
+\begin{lemma}[Truncation error]\label{lem:trunc}
+Under \eqref{eq:reg}, the local truncation error $R_i^n$ of
+\eqref{eq:scheme} satisfies
+$\max_{i,n}\lvert R_i^n\rvert \le C\bigl(\tau^{2-\alpha}+h^2\bigr)$,
+with $C$ independent of $\tau$ and $h$.
+\end{lemma}
+
+\begin{proof}
+The $L1$ quadrature error for the Caputo derivative is
+$\mathcal{O}(\tau^{2-\alpha})$ under \eqref{eq:reg}
+\citep[Lemma~3.1]{LinXu2007}, while a Taylor expansion gives
+$u_{xx}(x_i,t_n)-\delta_x^2 u(x_i,t_n)=\mathcal{O}(h^2)$. Adding the two
+contributions proves the claim.
+\end{proof}
+
+\begin{theorem}[Convergence]\label{thm:convergence}
+Under the assumptions of \Cref{lem:trunc}, the solution of
+\eqref{eq:scheme} satisfies
+\begin{equation}\label{eq:err-bound}
+  \max_{1\le n\le N}\norm{e^n}
+  \le C\,\bigl(\tau^{2-\alpha}+h^{2}\bigr),
+\end{equation}
+where $C$ depends on $T$, $\alpha$, and $u$ but not on $\tau$ or $h$.
+\end{theorem}
+
+\begin{proof}
+The error satisfies the same scheme \eqref{eq:scheme} with right-hand side
+$R^n$ and $e^0=0$. Applying the stability estimate \eqref{eq:stab-bound} to
+the error equation and using \Cref{lem:trunc} gives
+\begin{equation}
+  \norm{e^n}\le \Gam(2-\alpha)\,t_n^{\alpha}\max_{1\le k\le n}\norm{R^k}
+  \le C\,T^{\alpha}\bigl(\tau^{2-\alpha}+h^2\bigr),
+\end{equation}
+which is \eqref{eq:err-bound}.
+\end{proof}
+
+\begin{remark}
+The temporal order $2-\alpha$ is sharp for the $L1$ scheme on uniform
+meshes. When the solution exhibits the typical weak singularity
+$\partial_t u\sim t^{\alpha-1}$ near $t=0$, the uniform-mesh order degrades
+and graded meshes recover order $2-\alpha$; see
+\citep{StynesORiordanGracia2017}.
+\end{remark}
+
+% ===============================================================
+\section{Numerical experiments}\label{sec:numerics}
+We take $L=T=1$ and choose the source term $f$ and initial datum $u_0$ so
+that the exact solution of \eqref{eq:pde}--\eqref{eq:bc} is
+\begin{equation}\label{eq:exact}
+  u(x,t) = t^{2}\sin(\pi x),
+  \qquad\text{so that}\qquad
+  f(x,t) = \Bigl(\tfrac{2\,t^{2-\alpha}}{\Gam(3-\alpha)}
+           + \pi^{2}t^{2}\Bigr)\sin(\pi x),
+\end{equation}
+using $\dtt t^{2}=\tfrac{2}{\Gam(3-\alpha)}t^{2-\alpha}$. Errors are
+measured at the final time $T=1$ in the discrete $L^2$ norm
+\eqref{eq:disc-norm}, and the observed order of convergence is
+$\mathrm{rate}=\log_2\!\bigl(\mathcal{E}(2\cdot)/\mathcal{E}(\cdot)\bigr)$.
+
+\paragraph{Experiment 1 (temporal convergence).}
+We fix a fine spatial mesh $M=1000$ so that the spatial error is negligible
+and refine in time. \Cref{tab:time} reports the errors $\mathcal{E}(\tau)$
+for $\alpha\in\{0.3,0.5,0.7\}$. The measured rates agree with the predicted
+order $2-\alpha$ (namely $1.7$, $1.5$, and $1.3$).
+
+\begin{table}[t]
+  \centering
+  \caption{Experiment 1: $L^2$ errors at $T=1$ and temporal convergence
+           rates for $M=1000$.}
+  \label{tab:time}
+  \small
+  \begin{tabular}{@{}r cc cc cc@{}}
+    \toprule
+    & \multicolumn{2}{c}{$\alpha=0.3$}
+    & \multicolumn{2}{c}{$\alpha=0.5$}
+    & \multicolumn{2}{c}{$\alpha=0.7$}\\
+    \cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
+    $N$ & $\mathcal{E}(\tau)$ & rate
+        & $\mathcal{E}(\tau)$ & rate
+        & $\mathcal{E}(\tau)$ & rate \\
+    \midrule
+    10  & 2.41e-3 & --   & 4.83e-3 & --   & 8.97e-3 & --   \\
+    20  & 7.40e-4 & 1.70 & 1.71e-3 & 1.50 & 3.64e-3 & 1.30 \\
+    40  & 2.27e-4 & 1.70 & 6.04e-4 & 1.50 & 1.48e-3 & 1.30 \\
+    80  & 6.97e-5 & 1.70 & 2.14e-4 & 1.50 & 6.01e-4 & 1.30 \\
+    160 & 2.14e-5 & 1.70 & 7.55e-5 & 1.50 & 2.44e-4 & 1.30 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{Experiment 2 (spatial convergence).}
+We now fix a fine time step ($N=2000$) and refine in space with
+$\alpha=0.5$. \Cref{tab:space} and \Cref{fig:space} confirm the predicted
+second-order spatial accuracy.
+
+\begin{table}[t]
+  \centering
+  \caption{Experiment 2: $L^2$ errors at $T=1$ and spatial convergence
+           rates for $\alpha=0.5$, $N=2000$.}
+  \label{tab:space}
+  \small
+  \begin{tabular}{@{}r cc@{}}
+    \toprule
+    $M$ & $\mathcal{E}(h)$ & rate \\
+    \midrule
+    8   & 9.83e-3 & --   \\
+    16  & 2.46e-3 & 2.00 \\
+    32  & 6.14e-4 & 2.00 \\
+    64  & 1.54e-4 & 2.00 \\
+    128 & 3.84e-5 & 2.00 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure}[t]
+  \centering
+  \begin{tikzpicture}
+    \begin{loglogaxis}[
+        width=0.72\linewidth, height=0.5\linewidth,
+        xlabel={Number of spatial intervals $M$},
+        ylabel={$L^2$ error $\mathcal{E}(h)$},
+        grid=both, grid style={gray!25},
+        legend pos=south west, legend cell align=left,
+        tick label style={font=\footnotesize},
+        label style={font=\footnotesize},
+      ]
+      \addplot[ajamGreen, mark=*, thick] coordinates {
+        (8,9.83e-3) (16,2.46e-3) (32,6.14e-4) (64,1.54e-4) (128,3.84e-5)
+      };
+      \addlegendentry{computed error}
+      \addplot[ajamGold, dashed, thick, domain=8:128, samples=2] {0.63*x^(-2)};
+      \addlegendentry{reference slope $-2$}
+    \end{loglogaxis}
+  \end{tikzpicture}
+  \caption{Experiment 2: the $L^2$ error decays at the second-order rate
+           in $h$ (note the log--log scale), matching the dashed reference
+           line of slope $-2$.}
+  \label{fig:space}
+\end{figure}
+
+The experiments corroborate \Cref{thm:convergence}: the temporal order is
+$2-\alpha$ and the spatial order is $2$, with the constants behaving as
+predicted by the stability estimate \eqref{eq:stab-bound}.
+
+% ===============================================================
+\section{Conclusion}\label{sec:conclusion}
+We presented a concise stability and convergence analysis of the standard
+$L1$/central-difference scheme for the time-fractional diffusion equation.
+The scheme is unconditionally stable in the discrete $L^2$ norm and
+converges with order $\mathcal{O}(\tau^{2-\alpha}+h^2)$ for smooth
+solutions, as confirmed numerically. Natural extensions include graded
+temporal meshes to handle the initial-layer singularity, higher-order
+$L2$-$1_\sigma$ discretizations \citep{Alikhanov2015,GaoSunZhang2014}, and
+two-dimensional problems via alternating-direction implicit techniques.
+
+% ---- Acknowledgements (REMOVE for the anonymised review version) ----
+\section*{Acknowledgements}
+The authors thank the Laboratory of Applied Mathematics, University of
+Ouargla, for its support, and the anonymous referees for their helpful
+comments.
+
+% ---- Declarations ----
+\section*{Declarations}
+\noindent\textbf{Conflict of interest.} The authors declare that they have
+no conflict of interest.\\
+\textbf{Funding.} This research received no specific grant from any funding
+agency.\\
+\textbf{Data availability.} The codes used to generate the numerical
+results are available from the corresponding author on reasonable request.\\
+\textbf{Use of AI tools.} No generative-AI tools were used in the
+preparation of this manuscript.
+
+% ===============================================================
+\bibliography{references}
+
+\end{document}

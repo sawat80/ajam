@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import { ojs } from '../data/site';
+---
+
+<Base title="Page not found">
+  <section class="section">
+    <div class="container center">
+      <p class="error-code" aria-hidden="true">404</p>
+      <h1 class="error-title">Page not found</h1>
+      <p class="lead" style="margin-bottom: 2rem;">
+        The page you are looking for could not be found.<br />
+        It may have been moved, removed, or the address may have been mistyped.
+      </p>
+      <div class="error-actions">
+        <a href="/" class="btn btn--primary">Return home</a>
+        <a href={ojs.submit} class="btn btn--gold">Submit a manuscript</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .error-code {
+    font-size: clamp(5rem, 20vw, 10rem);
+    font-weight: 800;
+    line-height: 1;
+    color: var(--color-accent, #1d4ed8);
+    opacity: 0.15;
+    margin: 0 0 0.25rem;
+    letter-spacing: -0.04em;
+    user-select: none;
+  }
+
+  .error-title {
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    margin: 0 0 1rem;
+  }
+
+  .error-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+</style>

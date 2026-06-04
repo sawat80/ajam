@@ -1,0 +1,235 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { journal, subjects } from '../data/site';
+---
+
+<Base
+  title="Aims & Scope"
+  description="Learn about the aims, scope, and subject areas of the Algerian Journal of Applied Mathematics (AJAM), a diamond open-access peer-reviewed journal published by the Laboratory of Applied Mathematics at Kasdi Merbah University, Ouargla."
+>
+  <PageHeader
+    eyebrow="About the journal"
+    title="Aims & Scope"
+    subtitle="Original research, surveys, and computational studies across applied and computational mathematics — free to read, free to publish."
+  />
+
+  <!-- INTRODUCTION -->
+  <section class="section">
+    <div class="container prose">
+      <p class="lead">
+        The <strong>{journal.title}</strong> (AJAM) is a peer-reviewed, diamond open-access journal
+        published by the <strong>{journal.publisher}</strong> at <strong>{journal.institution}</strong>,
+        Algeria. The journal publishes original research articles, high-quality survey and review
+        papers, and significant computational studies across the breadth of applied and computational
+        mathematics. AJAM operates under a diamond open-access model: there are no article-processing
+        charges for authors and no subscription fees for readers, ensuring that mathematical
+        scholarship is freely and permanently accessible to all.
+      </p>
+      <p>
+        AJAM welcomes contributions from researchers worldwide. While the journal is rooted in the
+        Algerian academic tradition, its editorial board, authorship, and readership are explicitly
+        international in scope. All submissions undergo rigorous double-blind peer review coordinated
+        through an Open Journal Systems (OJS) platform, in accordance with the ethical standards of
+        the Committee on Publication Ethics (COPE).
+      </p>
+    </div>
+  </section>
+
+  <!-- AIMS -->
+  <section class="section section--alt">
+    <div class="container prose">
+      <p class="eyebrow">Mission</p>
+      <h2>Aims of the journal</h2>
+      <p>
+        AJAM is guided by the following core objectives:
+      </p>
+      <ul>
+        <li>
+          <strong>Advance applied and computational mathematics.</strong> Promote high-quality
+          original research that extends the frontiers of mathematical theory and its applications
+          in science, engineering, and industry.
+        </li>
+        <li>
+          <strong>Bridge theory and application.</strong> Provide a venue that values both rigorous
+          mathematical foundations and their practical relevance, encouraging papers that connect
+          abstract results with real-world modelling, simulation, or algorithmic development.
+        </li>
+        <li>
+          <strong>Serve the Algerian and international research community.</strong> Offer a
+          high-visibility publication channel that strengthens ties between Algerian institutions
+          and the global mathematical community, facilitating scientific exchange without geographic
+          or economic barriers.
+        </li>
+        <li>
+          <strong>Ensure free and unrestricted dissemination of knowledge.</strong> Through diamond
+          open access and the Creative Commons CC BY 4.0 licence, AJAM guarantees that all
+          published content can be freely read, shared, and built upon by anyone, in perpetuity.
+        </li>
+        <li>
+          <strong>Support early-career researchers.</strong> Provide a fair, transparent, and
+          constructive review process that mentors doctoral students and junior faculty, helping
+          them publish their first peer-reviewed results alongside established scholars.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- SUBJECT AREAS -->
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Coverage</p>
+      <h2>Scope and subject areas</h2>
+      <p class="lead">
+        AJAM considers manuscripts in, but not limited to, the following areas of applied and
+        computational mathematics:
+      </p>
+      <div class="grid grid--4 subjects-grid">
+        {subjects.map((s) => (
+          <div class="card card--accent subject-card">
+            <span class="subject-icon" aria-hidden="true">{s.icon}</span>
+            <span class="subject-name">{s.name}</span>
+          </div>
+        ))}
+      </div>
+      <p class="muted" style="margin-top:1.5rem">
+        Interdisciplinary work that applies mathematical methods to problems in physics, biology,
+        economics, environmental science, or engineering is equally welcome, provided the
+        mathematical contribution is central and substantial.
+      </p>
+    </div>
+  </section>
+
+  <!-- ARTICLE TYPES -->
+  <section class="section section--alt">
+    <div class="container prose">
+      <p class="eyebrow">Submission types</p>
+      <h2>Article types we publish</h2>
+      <p>
+        Authors should indicate the article type at submission. Indicative page lengths refer to
+        the final published PDF using the AJAM LaTeX template.
+      </p>
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Article type</th>
+              <th>Description</th>
+              <th>Indicative length</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Original Research Article</strong></td>
+              <td>A complete study presenting new theoretical results, proofs, or methodologies, with full derivations and discussion.</td>
+              <td>12–30 pages</td>
+            </tr>
+            <tr>
+              <td><strong>Review / Survey Article</strong></td>
+              <td>A comprehensive, critical synthesis of a research area; must provide new insights or a structured perspective beyond a literature list.</td>
+              <td>20–50 pages</td>
+            </tr>
+            <tr>
+              <td><strong>Short Communication</strong></td>
+              <td>A concise report of a focused, self-contained result or observation that merits rapid dissemination.</td>
+              <td>4–10 pages</td>
+            </tr>
+            <tr>
+              <td><strong>Computational / Software Note</strong></td>
+              <td>Description and validation of a novel algorithm, numerical scheme, or open-source mathematical software package, with reproducible benchmarks.</td>
+              <td>6–15 pages</td>
+            </tr>
+            <tr>
+              <td><strong>Letter to the Editor</strong></td>
+              <td>A brief, scholarly comment on a recently published AJAM article, including corrections, extensions, or alternative interpretations; author response may be published alongside.</td>
+              <td>1–4 pages</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUT OF SCOPE -->
+  <section class="section">
+    <div class="container prose">
+      <p class="eyebrow">Editorial policy</p>
+      <h2>What AJAM does not consider</h2>
+      <p>
+        To maintain focus and quality, the following categories of manuscripts fall outside the
+        scope of AJAM and will be returned without external review:
+      </p>
+      <ul>
+        <li>
+          <strong>Purely pedagogical or expository notes</strong> that do not contain original
+          mathematical results or a substantive new perspective for a research audience.
+        </li>
+        <li>
+          <strong>Numerical or computational claims unsupported by methodological detail</strong>
+          — results obtained by black-box software without documented algorithms, convergence
+          analysis, or reproducibility information will not be considered.
+        </li>
+        <li>
+          <strong>Plagiarised, duplicate, or concurrent submissions.</strong> Manuscripts under
+          review elsewhere, or that reproduce previously published content without proper
+          attribution, are a violation of AJAM's publication ethics and will result in immediate
+          rejection and potential notification of the author's institution.
+        </li>
+      </ul>
+      <p class="muted">
+        Manuscripts that are out of scope, or that do not meet minimum formatting requirements,
+        may be desk-rejected by the Editor-in-Chief prior to peer review.
+      </p>
+    </div>
+  </section>
+
+  <!-- CLOSING NOTICE -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="notice">
+        <strong>Ready to submit?</strong> AJAM welcomes original contributions from researchers at
+        all career stages and from any country. Submissions are handled through our Open Journal
+        Systems platform. Please consult the{' '}
+        <a href="/for-authors/">Author Guidelines</a> for full preparation and submission
+        instructions, including LaTeX template download, ethical requirements, and review timelines.
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .subjects-grid {
+    margin-top: 1.5rem;
+  }
+
+  .subject-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .subject-icon {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    background: var(--green-100);
+    color: var(--green-700);
+    border-radius: 8px;
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+
+  .subject-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    margin-top: 1rem;
+  }
+</style>

@@ -1,0 +1,17 @@
+{
+  "name": "ajam-website",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Algerian Journal of Applied Mathematics — official website",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.6.1",
+    "@astrojs/sitemap": "^3.3.0"
+  }
+}

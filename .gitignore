@@ -1,0 +1,44 @@
+# build output
+dist/
+.output/
+
+# dependencies
+node_modules/
+
+# astro
+.astro/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# env
+.env
+.env.production
+
+# docker runtime data (db, uploads, generated config, logs)
+volumes/
+
+# os / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# local agent tooling
+.claude/
+
+# JetBrains module file
+*.iml
+
+# LaTeX build artifacts
+latex-template/*.aux
+latex-template/*.log
+latex-template/*.bbl
+latex-template/*.blg
+latex-template/*.out
+latex-template/*.toc
+latex-template/ajam-template.pdf
+latex-template/logos/*.aux
+latex-template/logos/*.log

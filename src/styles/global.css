@@ -1,0 +1,132 @@
+/* ============================================================
+   AJAM — global styles & design tokens
+   University-branded: deep green + desert sand + gold accent
+   ============================================================ */
+
+:root {
+  /* Brand palette — Ouargla / Algerian desert identity */
+  --green-900: #0f3d2e;
+  --green-800: #14543f;
+  --green-700: #1b6b4f;
+  --green-600: #237a5b;
+  --green-100: #e4f0ea;
+  --sand-500: #c8a96a;
+  --sand-300: #e2cfa3;
+  --sand-100: #f6efe0;
+  --gold: #b9892f;
+  --ink: #1c2420;
+  --ink-soft: #4a544e;
+  --line: #e3e0d7;
+  --bg: #ffffff;
+  --bg-alt: #faf7f0;
+
+  /* Type */
+  --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  /* Layout */
+  --maxw: 1120px;
+  --radius: 10px;
+  --shadow: 0 1px 2px rgba(15, 61, 46, .06), 0 8px 24px rgba(15, 61, 46, .07);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.65;
+  font-size: 17px;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  color: var(--green-900);
+  line-height: 1.2;
+  font-weight: 700;
+  margin: 0 0 .5em;
+}
+h1 { font-size: clamp(1.9rem, 4vw, 2.6rem); }
+h2 { font-size: clamp(1.4rem, 2.6vw, 1.8rem); }
+h3 { font-size: 1.2rem; }
+
+p { margin: 0 0 1rem; }
+
+a { color: var(--green-700); text-decoration: none; }
+a:hover { color: var(--gold); text-decoration: underline; }
+
+/* ---- layout helpers ---- */
+.container { max-width: var(--maxw); margin-inline: auto; padding-inline: 1.25rem; }
+.section { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
+.section--alt { background: var(--bg-alt); border-block: 1px solid var(--line); }
+.lead { font-size: 1.15rem; color: var(--ink-soft); max-width: 65ch; }
+.eyebrow {
+  text-transform: uppercase; letter-spacing: .12em; font-size: .78rem;
+  font-weight: 700; color: var(--green-600); font-family: var(--font-sans);
+}
+.prose { max-width: 72ch; }
+.prose ul, .prose ol { padding-left: 1.3rem; }
+.prose li { margin-bottom: .4rem; }
+.prose h2 { margin-top: 2.2rem; }
+.prose h3 { margin-top: 1.6rem; }
+
+/* ---- buttons ---- */
+.btn {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .7rem 1.3rem; border-radius: var(--radius);
+  font-weight: 600; font-family: var(--font-sans); font-size: 1rem;
+  border: 1px solid transparent; cursor: pointer; transition: .18s ease;
+}
+.btn--primary { background: var(--green-700); color: #fff; }
+.btn--primary:hover { background: var(--green-800); color: #fff; text-decoration: none; }
+.btn--ghost { background: transparent; color: var(--green-800); border-color: var(--green-600); }
+.btn--ghost:hover { background: var(--green-100); color: var(--green-900); text-decoration: none; }
+.btn--gold { background: var(--gold); color: #fff; }
+.btn--gold:hover { background: #a3771f; color: #fff; text-decoration: none; }
+
+/* ---- cards & grids ---- */
+.grid { display: grid; gap: 1.25rem; }
+.grid--2 { grid-template-columns: repeat(2, 1fr); }
+.grid--3 { grid-template-columns: repeat(3, 1fr); }
+.grid--4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 860px) { .grid--3, .grid--4 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .grid--2, .grid--3, .grid--4 { grid-template-columns: 1fr; } }
+
+.card {
+  background: var(--bg); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 1.4rem; box-shadow: var(--shadow);
+}
+.card h3 { margin-top: 0; }
+.card--accent { border-top: 4px solid var(--sand-500); }
+
+/* ---- callout / notice ---- */
+.notice {
+  border-left: 4px solid var(--gold); background: var(--sand-100);
+  padding: 1rem 1.25rem; border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+/* ---- table ---- */
+.table { width: 100%; border-collapse: collapse; }
+.table th, .table td { text-align: left; padding: .7rem .9rem; border-bottom: 1px solid var(--line); }
+.table th { background: var(--green-100); color: var(--green-900); font-family: var(--font-sans); }
+
+/* ---- misc ---- */
+.tag {
+  display: inline-block; font-size: .8rem; font-weight: 600;
+  background: var(--green-100); color: var(--green-800);
+  padding: .2rem .6rem; border-radius: 999px;
+}
+.divider { height: 1px; background: var(--line); border: 0; margin-block: 2rem; }
+.center { text-align: center; }
+.muted { color: var(--ink-soft); }
+:focus-visible { outline: 3px solid var(--sand-500); outline-offset: 2px; }
+.skip-link {
+  position: absolute; left: -999px; top: 0; background: var(--green-800); color: #fff;
+  padding: .6rem 1rem; z-index: 100;
+}
+.skip-link:focus { left: 0; }

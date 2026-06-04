@@ -1,0 +1,167 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { editorialBoard, contact } from '../data/site';
+---
+
+<Base title="Editorial Board" description="Meet the Editorial Board of the Algerian Journal of Applied Mathematics — dedicated scholars ensuring rigorous, fair, and expert peer review.">
+  <PageHeader
+    eyebrow="People"
+    title="Editorial Board"
+    subtitle="Scholars and practitioners guiding the scientific integrity and direction of AJAM."
+  />
+
+  <section class="section">
+    <div class="container">
+
+      <div class="prose lead">
+        <p>
+          The Editorial Board of the <em>Algerian Journal of Applied Mathematics</em> is composed of
+          leading researchers drawn from diverse institutions and mathematical disciplines worldwide.
+          Board members are responsible for upholding the highest standards of peer review,
+          ensuring impartiality, scholarly rigor, and timely evaluation of all submitted manuscripts.
+          Their collective expertise spans pure and applied mathematics, mathematical modelling,
+          numerical analysis, and interdisciplinary applications.
+        </p>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- ───────────────────────────── Editor-in-Chief ───────────────────────────── -->
+      <h2 class="section-title">Editor-in-Chief</h2>
+
+      <div class="eic-wrapper">
+        <div class="card card--accent eic-card">
+          <p class="eic-name">{editorialBoard.editorInChief.name}</p>
+          <p class="muted">{editorialBoard.editorInChief.affiliation}</p>
+          <a
+            href={`mailto:${editorialBoard.editorInChief.email}`}
+            class="btn eic-btn"
+          >
+            {editorialBoard.editorInChief.email}
+          </a>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- ───────────────────────────── Managing Editors ───────────────────────────── -->
+      <h2 class="section-title">Managing Editors</h2>
+
+      <div class="grid grid--3">
+        {editorialBoard.managingEditors.map((editor) => (
+          <div class="card">
+            <p class="member-name">{editor.name}</p>
+            <p class="muted">{editor.affiliation}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- ───────────────────────────── Associate Editors ───────────────────────────── -->
+      <h2 class="section-title">Associate Editors</h2>
+
+      <div class="grid grid--2">
+        {editorialBoard.associateEditors.map((editor) => (
+          <div class="card">
+            <p class="member-name">{editor.name}</p>
+            <span class="tag">{editor.field}</span>
+            <p class="muted assoc-affil">{editor.affiliation}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- ───────────────────────────── Advisory Board ───────────────────────────── -->
+      <h2 class="section-title">International Advisory Board</h2>
+
+      <div class="grid grid--3">
+        {editorialBoard.advisoryBoard.map((member) => (
+          <div class="card">
+            <p class="member-name">{member.name}</p>
+            <p class="muted">{member.affiliation}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- ───────────────────────────── Closing notice ───────────────────────────── -->
+      <div class="notice center">
+        <p>
+          Interested in joining the board?{' '}
+          <a href={`mailto:${contact.editorialEmail}`}>Email us</a> with your
+          area of expertise and a brief academic biography.
+        </p>
+      </div>
+
+      <!-- Board member names shown are placeholders to be finalized by the editorial office. -->
+      <p class="muted center placeholder-note">
+        Board member names shown are placeholders pending finalisation by the editorial office.
+      </p>
+
+    </div>
+  </section>
+</Base>
+
+<style>
+  .section-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    margin-bottom: 1.25rem;
+  }
+
+  /* Editor-in-Chief */
+  .eic-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .eic-card {
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+    padding: 2rem 2.5rem;
+  }
+
+  .eic-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+  }
+
+  .eic-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    word-break: break-all;
+  }
+
+  /* General member cards */
+  .member-name {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .assoc-affil {
+    margin-top: 0.4rem;
+  }
+
+  /* Tag spacing */
+  .tag {
+    display: inline-block;
+    margin-top: 0.15rem;
+  }
+
+  /* Placeholder note */
+  .placeholder-note {
+    font-size: 0.8rem;
+    margin-top: 1.5rem;
+    opacity: 0.7;
+  }
+</style>

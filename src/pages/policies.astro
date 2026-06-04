@@ -1,0 +1,253 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { journal, contact } from '../data/site';
+---
+
+<Base
+  title="Ethics & Policies"
+  description={`Publication ethics, peer review, open-access licensing, and editorial policies of the ${journal.title}.`}
+>
+  <PageHeader
+    eyebrow="Governance"
+    title="Ethics & Editorial Policies"
+    subtitle={`The ${journal.title} is committed to the highest standards of publication ethics and scholarly integrity. All stakeholders — authors, reviewers, and editors — are expected to uphold the principles set out below.`}
+  />
+
+  <section class="section">
+    <div class="container">
+
+      <!-- On This Page -->
+      <nav class="toc" aria-label="On this page">
+        <p class="toc__label muted">On this page</p>
+        <ol class="toc__list">
+          <li><a href="#pub-ethics">Publication Ethics &amp; Malpractice Statement</a></li>
+          <li><a href="#peer-review">Peer Review Policy</a></li>
+          <li><a href="#authorship">Authorship &amp; Contributorship</a></li>
+          <li><a href="#originality">Originality &amp; Plagiarism</a></li>
+          <li><a href="#open-access">Open Access &amp; Licensing</a></li>
+          <li><a href="#copyright">Copyright</a></li>
+          <li><a href="#conflicts">Conflicts of Interest</a></li>
+          <li><a href="#corrections">Corrections, Retractions &amp; Errata</a></li>
+          <li><a href="#data-code">Data &amp; Code Availability</a></li>
+          <li><a href="#ai-tools">Use of AI Tools</a></li>
+          <li><a href="#archiving">Archiving &amp; Preservation</a></li>
+          <li><a href="#complaints">Complaints &amp; Appeals</a></li>
+        </ol>
+      </nav>
+
+      <div class="divider"></div>
+
+      <div class="prose">
+
+        <!-- 1. Publication Ethics -->
+        <h2 id="pub-ethics">1. Publication Ethics &amp; Malpractice Statement</h2>
+        <p>
+          The <strong>{journal.title} (AJAM)</strong> is committed to maintaining the integrity of the scholarly record. All parties involved in the publication process — authors, peer reviewers, section editors, and the Editor-in-Chief — are expected to adhere to the ethical standards defined by the <a href="https://publicationethics.org/" target="_blank" rel="noopener noreferrer">Committee on Publication Ethics (COPE)</a>. The journal follows the COPE Core Practices and, where relevant, its flowcharts and guidelines for handling suspected misconduct.
+        </p>
+        <p>
+          Any form of publication malpractice — including fabrication or falsification of data, plagiarism, duplicate submission, or undisclosed conflicts of interest — is taken seriously. Suspected cases will be investigated promptly and transparently, and appropriate corrective action will be taken.
+        </p>
+
+        <!-- 2. Peer Review -->
+        <h2 id="peer-review">2. Peer Review Policy</h2>
+        <p>
+          All research manuscripts submitted to AJAM undergo <strong>double-blind peer review</strong>: the identities of both authors and reviewers remain concealed from one another throughout the review process. Reviewer reports are treated as confidential documents and are not shared with third parties.
+        </p>
+        <p>
+          Each submission is assessed by a minimum of <strong>two independent expert reviewers</strong> with demonstrable expertise in the manuscript's subject area. The Editor-in-Chief (or a designated Associate Editor) makes the final publication decision, taking into account the scientific quality of the work and the reviewers' recommendations. Acceptance cannot be guaranteed solely on the basis of positive reviewer reports; editorial judgement on scope, clarity, and contribution is also applied.
+        </p>
+        <p>
+          <strong>Review timeline.</strong> Authors can expect an initial editorial decision (desk rejection or invitation to peer review) within four weeks of submission. Full peer review is typically completed within eight to twelve weeks, subject to reviewer availability.
+        </p>
+        <p>
+          <strong>Appeals.</strong> Authors who believe that an editorial decision was based on a misunderstanding of their work, or that the review process was flawed, may submit a formal written appeal to the editorial office at <a href={`mailto:${contact.editorialEmail}`}>{contact.editorialEmail}</a>. Appeals must be submitted within thirty days of receiving the decision and must specify the grounds for disagreement. The Editor-in-Chief will review the appeal and may seek additional expert opinions. The outcome of the appeal process is final.
+        </p>
+
+        <!-- 3. Authorship -->
+        <h2 id="authorship">3. Authorship &amp; Contributorship</h2>
+        <p>
+          Authorship of a manuscript published in AJAM must be limited to individuals who have made a substantive intellectual contribution to the work. All listed authors should satisfy each of the following criteria, consistent with the <a href="https://www.icmje.org/recommendations/browse/roles-and-responsibilities/defining-the-roles-of-authors-and-contributors.html" target="_blank" rel="noopener noreferrer">ICMJE recommendations</a>:
+        </p>
+        <ul>
+          <li>Substantial contribution to the conception or design of the work, or to the acquisition, analysis, or interpretation of data;</li>
+          <li>Drafting or critically revising the manuscript for important intellectual content;</li>
+          <li>Approval of the final version to be published; and</li>
+          <li>Agreement to be accountable for all aspects of the work.</li>
+        </ul>
+        <p>
+          <strong>Ghost authorship</strong> (listing individuals who did not contribute) and <strong>gift authorship</strong> (listing individuals who contributed only marginally, for reasons of seniority or reciprocity) are prohibited and constitute a form of misconduct.
+        </p>
+        <p>
+          The <strong>corresponding author</strong> is responsible for ensuring that all co-authors have approved the submitted version, agreed to the order of authorship, and consented to the corresponding author acting on their behalf throughout the submission and review process.
+        </p>
+        <p>
+          <strong>Changes to authorship</strong> after submission — including the addition, removal, or reordering of authors — require the written consent of all listed authors and must be communicated to the editorial office with a clear explanation. Such requests will not be granted after acceptance unless exceptional circumstances are demonstrated.
+        </p>
+
+        <!-- 4. Originality & Plagiarism -->
+        <h2 id="originality">4. Originality &amp; Plagiarism</h2>
+        <div class="notice" role="note">
+          <strong>Zero tolerance for plagiarism.</strong> Manuscripts submitted to AJAM must report original, unpublished research not under consideration elsewhere. Any form of plagiarism or self-plagiarism will lead to immediate rejection or retraction and may be reported to the authors' institutions.
+        </div>
+        <p>
+          All submitted manuscripts are screened using automated similarity-detection software prior to peer review. A similarity report is reviewed by the editorial office; high overall similarity scores or any substantial verbatim or near-verbatim overlap with existing publications — including the authors' own previously published work — will trigger further investigation.
+        </p>
+        <p>
+          <strong>Plagiarism</strong> encompasses the unattributed reproduction of text, figures, data, or ideas from any source. <strong>Self-plagiarism</strong> (recycling substantial portions of one's own prior publications without proper citation and disclosure) is equally prohibited. Authors are expected to quote and cite all sources appropriately and to clearly indicate which portions of the submitted manuscript, if any, have appeared in preliminary form (e.g., conference proceedings), with full disclosure to the editorial office.
+        </p>
+        <p>
+          Where plagiarism is confirmed after publication, the journal will issue a retraction in accordance with COPE guidelines and will notify the authors' institutions as appropriate.
+        </p>
+
+        <!-- 5. Open Access & Licensing -->
+        <h2 id="open-access">5. Open Access &amp; Licensing</h2>
+        <div class="notice" role="note">
+          <strong>Diamond Open Access — no fees of any kind.</strong> AJAM charges no article processing charges (APCs) and no submission fees. All published content is immediately and permanently available free of charge to all readers worldwide.
+        </div>
+        <p>
+          {journal.title} operates under a <strong>Diamond Open Access</strong> model: the journal is free to read and free to publish in. Publication costs are borne entirely by the Laboratory of Applied Mathematics, Kasdi Merbah University, Ouargla.
+        </p>
+        <p>
+          All articles are published under the <strong><a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">{journal.license} (Creative Commons Attribution 4.0 International)</a></strong> licence. This means that readers and re-users may freely share, copy, and redistribute the material in any medium or format, and adapt, remix, transform, and build upon it for any purpose, provided that appropriate credit is given to the original authors and source, a link to the licence is provided, and any changes are indicated. No additional restrictions may be applied.
+        </p>
+        <p>
+          <strong>Authors retain copyright</strong> in their work. By submitting to AJAM, authors grant the journal a non-exclusive, irrevocable licence to publish, reproduce, and distribute the work under the terms of {journal.license}.
+        </p>
+
+        <!-- 6. Copyright -->
+        <h2 id="copyright">6. Copyright</h2>
+        <p>
+          Authors retain full copyright over their published work. Upon acceptance, authors grant {journal.title} the right of <strong>first publication</strong> — the non-exclusive right to publish the work and to make it available in any medium or format under the {journal.license} licence. This grant does not prevent authors from subsequently depositing their work in institutional repositories, distributing preprints, or including the published article in theses, books, or other scholarly communications, provided that the original publication in AJAM is properly acknowledged.
+        </p>
+        <p>
+          Third parties wishing to reproduce material from AJAM for purposes not covered by the Creative Commons licence should contact the corresponding author directly, as copyright remains with the author.
+        </p>
+
+        <!-- 7. Conflicts of Interest -->
+        <h2 id="conflicts">7. Conflicts of Interest</h2>
+        <p>
+          All parties involved in the publication process are required to disclose any relationships or circumstances that could be perceived as influencing their contributions or decisions.
+        </p>
+        <p>
+          <strong>Authors</strong> must declare, in a dedicated section of the manuscript, all financial and non-financial interests that could be perceived as having influenced the reported research or the conclusions drawn. This includes, but is not limited to, funding sources, employment relationships, consultancies, stock ownership, honoraria, and personal or institutional relationships relevant to the subject matter.
+        </p>
+        <p>
+          <strong>Reviewers</strong> are expected to decline review invitations whenever a conflict of interest exists — for example, when the reviewer is a close collaborator, current or recent co-author, or professional competitor of any of the authors, or when the reviewer has a direct financial interest in the outcome of the review. Any doubt should be disclosed to the handling editor before accepting the assignment.
+        </p>
+        <p>
+          <strong>Editors</strong> must recuse themselves from decisions on manuscripts in which they have a conflict of interest (e.g., manuscripts from their own research group, institution, or close associates). In such cases, another senior editor will handle the manuscript independently.
+        </p>
+
+        <!-- 8. Corrections, Retractions & Errata -->
+        <h2 id="corrections">8. Corrections, Retractions &amp; Errata</h2>
+        <p>
+          AJAM recognises its responsibility to maintain the integrity and accuracy of the published record. Errors identified after publication are addressed as follows:
+        </p>
+        <ul>
+          <li><strong>Erratum / Corrigendum.</strong> A formal correction notice is published when an error of limited scope is identified that does not affect the main conclusions of the work. An erratum covers errors introduced by the journal; a corrigendum covers errors introduced by the authors.</li>
+          <li><strong>Retraction.</strong> An article will be retracted if its main findings or conclusions are found to be unreliable as a result of misconduct (fabrication, falsification, plagiarism) or honest error, or if the work was previously published elsewhere without proper disclosure. Retraction notices will clearly state the reason for retraction and will be linked to the original article. The original article will be retained on the platform with a clear watermark indicating its retracted status.</li>
+          <li><strong>Expression of Concern.</strong> In cases where an investigation is ongoing or the evidence is inconclusive, an Expression of Concern may be published as an interim measure.</li>
+        </ul>
+        <p>
+          All corrections and retractions follow COPE guidelines. Authors, readers, or third parties who become aware of a potential error or concern are encouraged to contact the editorial office at <a href={`mailto:${contact.editorialEmail}`}>{contact.editorialEmail}</a>.
+        </p>
+
+        <!-- 9. Data & Code Availability -->
+        <h2 id="data-code">9. Data &amp; Code Availability</h2>
+        <p>
+          AJAM strongly encourages authors to make all data and software code underpinning their published findings openly available, in order to support transparency and reproducibility. Authors are asked to include a <strong>Data and Code Availability Statement</strong> in their manuscript indicating where and how the supporting materials can be accessed.
+        </p>
+        <p>
+          Suitable repositories for sharing research data and code include discipline-specific archives, institutional repositories, and general-purpose platforms such as <a href="https://zenodo.org/" target="_blank" rel="noopener noreferrer">Zenodo</a>, <a href="https://figshare.com/" target="_blank" rel="noopener noreferrer">Figshare</a>, or <a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a> (with an archival release). Where data cannot be shared — for instance, due to privacy constraints or third-party ownership — authors should state this clearly and provide the reason.
+        </p>
+        <p>
+          Software or code essential for reproducing the reported results should be deposited in a version-controlled repository and referenced by a persistent identifier (DOI or equivalent) in the manuscript.
+        </p>
+
+        <!-- 10. Use of AI Tools -->
+        <h2 id="ai-tools">10. Use of Artificial Intelligence (AI) Tools</h2>
+        <p>
+          AJAM recognises the growing use of generative AI and large language model (LLM) tools in research and writing workflows, and has adopted the following policy, consistent with emerging community standards.
+        </p>
+        <p>
+          <strong>Authors</strong> who use generative AI tools (e.g., for drafting, editing, translation, or code generation) must disclose this use in the Methods section or an Acknowledgements statement, specifying the tool used and the nature of its application. AI tools may not be listed as authors; authorship implies accountability that AI systems cannot assume. Authors remain fully responsible for the accuracy, integrity, and originality of all content in the manuscript, regardless of any AI assistance.
+        </p>
+        <p>
+          <strong>Reviewers</strong> must not upload any part of a manuscript — including the abstract or any excerpts — to external AI or LLM services. Manuscripts are confidential documents, and uploading them to third-party systems may violate author confidentiality and intellectual property rights.
+        </p>
+        <p>
+          <strong>Editors</strong> are similarly prohibited from using AI services in ways that could compromise manuscript confidentiality or the integrity of the editorial process.
+        </p>
+
+        <!-- 11. Archiving & Preservation -->
+        <h2 id="archiving">11. Archiving &amp; Preservation</h2>
+        <p>
+          AJAM is committed to the long-term preservation of all published content. The journal is hosted on <strong>Open Journal Systems (OJS)</strong>, which participates in the <a href="https://pkp.sfu.ca/pkp-pn/" target="_blank" rel="noopener noreferrer">PKP Preservation Network (PKP PN)</a> — a distributed digital preservation system based on the <strong>LOCKSS</strong> (Lots of Copies Keep Stuff Safe) framework. Under this arrangement, content is automatically preserved across a network of geographically distributed nodes, ensuring long-term access even in the event of technical failure or discontinuation of the journal.
+        </p>
+        <p>
+          In addition, published articles are deposited in the <strong>institutional repository of Kasdi Merbah University, Ouargla</strong>, providing a further layer of redundancy. Authors are also encouraged to self-archive their accepted manuscripts in their own institutional repositories or in discipline-specific preprint servers, in compliance with the {journal.license} licence terms.
+        </p>
+
+        <!-- 12. Complaints & Appeals -->
+        <h2 id="complaints">12. Complaints &amp; Appeals</h2>
+        <p>
+          AJAM provides a clear, transparent mechanism for handling complaints and appeals from any party — authors, reviewers, readers, or third parties.
+        </p>
+        <p>
+          Complaints may relate to editorial decisions, delays in the review process, suspected misconduct, or any other aspect of the journal's operations. All complaints will be acknowledged within five working days and will be investigated promptly and impartially by the Editor-in-Chief or, where appropriate, by an independent member of the editorial board.
+        </p>
+        <p>
+          To submit a complaint or to appeal an editorial decision, please write to the editorial office:
+        </p>
+        <p>
+          <a href={`mailto:${contact.editorialEmail}`} class="btn">{contact.editorialEmail}</a>
+        </p>
+        <p>
+          The subject line should clearly indicate whether the correspondence is a <em>Complaint</em> or an <em>Appeal</em>, and should include the manuscript reference number if applicable. If the matter cannot be resolved satisfactorily at the editorial level, AJAM may seek guidance from COPE or refer the case to the relevant institutional authorities.
+        </p>
+
+      </div><!-- /.prose -->
+    </div><!-- /.container -->
+  </section>
+</Base>
+
+<style>
+  .toc {
+    background: var(--color-surface, #f8f9fa);
+    border: 1px solid var(--color-border, #e5e7eb);
+    border-radius: 0.5rem;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2rem;
+    display: inline-block;
+    min-width: 18rem;
+    max-width: 100%;
+  }
+
+  .toc__label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin: 0 0 0.5rem;
+  }
+
+  .toc__list {
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+
+  .toc__list li {
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
+  }
+
+  .toc__list a {
+    text-decoration: none;
+    color: var(--color-accent, #1d4ed8);
+  }
+
+  .toc__list a:hover {
+    text-decoration: underline;
+  }
+</style>

@@ -1,0 +1,87 @@
+# ════════════════════════════════════════════════════════════════
+#  AJAM integrated stack
+#  web (Nginx)  ──/────▶  static Astro site  (./dist)
+#               ──/ojs─▶  ojs  (Open Journal Systems, PHP/Apache)
+#  ojs          ───────▶  db   (MariaDB)
+#
+#  Quick start:
+#    cp .env.example .env   &&  edit passwords
+#    npm install && npm run build        # produces ./dist
+#    docker compose up -d
+#    open http://localhost:8080/         (site)
+#    open http://localhost:8080/ojs      (OJS install wizard)
+# ════════════════════════════════════════════════════════════════
+
+name: ${COMPOSE_PROJECT_NAME:-ajam}
+
+services:
+  # ── MariaDB ──────────────────────────────────────────────────
+  db:
+    image: ${DB_IMAGE:-mariadb:11.4}
+    container_name: ${COMPOSE_PROJECT_NAME:-ajam}-db
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: ${DB_NAME:-ojs}
+      MARIADB_USER: ${DB_USER:-ojs}
+      MARIADB_PASSWORD: ${DB_PASSWORD:-ojsPwd}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-rootPwd}
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --max-allowed-packet=64M
+    volumes:
+      - ./volumes/db:/var/lib/mysql
+    networks: [inside]
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  # ── Open Journal Systems ─────────────────────────────────────
+  ojs:
+    image: ${OJS_IMAGE:-pkpofficial/ojs:3_4_0-4}
+    container_name: ${COMPOSE_PROJECT_NAME:-ajam}-ojs
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SERVERNAME: ${SERVERNAME:-localhost}
+      PKP_TOOL: ${PKP_TOOL:-ojs}
+      PKP_VERSION: ${PKP_VERSION:-3_4_0-4}
+      PKP_CLI_INSTALL: ${PKP_CLI_INSTALL:-0}
+      # NOTE: the pkpofficial image reads OJS_DB_* (not DB_*)
+      OJS_DB_HOST: ${DB_HOST:-db}
+      OJS_DB_NAME: ${DB_NAME:-ojs}
+      OJS_DB_USER: ${DB_USER:-ojs}
+      OJS_DB_PASSWORD: ${DB_PASSWORD:-ojsPwd}
+      # internal Apache listen port (Nginx proxies to this)
+      HTTP_PORT: 80
+    volumes:
+      - ./volumes/private:/var/www/files
+      - ./volumes/public:/var/www/html/public
+      - ./volumes/logs/app:/var/log/apache2
+      # persist the installed config so restarts/recreates don't reset OJS to
+      # "not installed". Created by deploy/install-ojs.sh (or copied out manually).
+      - ./volumes/config/ojs.config.inc.php:/var/www/html/config.inc.php
+      # serve OJS under the /ojs subpath (Apache Alias) so asset URLs resolve
+      - ./deploy/ojs/ojs.conf:/etc/apache2/conf.d/ojs.conf
+    networks: [inside]
+
+  # ── Nginx front door (static site + /ojs reverse proxy) ──────
+  web:
+    image: nginx:1.27-alpine
+    container_name: ${COMPOSE_PROJECT_NAME:-ajam}-web
+    restart: unless-stopped
+    depends_on: [ojs]
+    ports:
+      - "${WEB_HTTP_PORT:-8080}:80"
+    volumes:
+      - ./dist:/usr/share/nginx/html:ro
+      - ./deploy/nginx/ajam.conf:/etc/nginx/conf.d/default.conf:ro
+    networks: [inside]
+
+networks:
+  inside:
+    driver: bridge

@@ -1,0 +1,92 @@
+---
+import { journal, nav, ojs } from '../data/site';
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path.startsWith(href);
+---
+
+<header class="site-header">
+  <div class="container bar">
+    <a class="brand" href="/">
+      <span class="brand__mark" aria-hidden="true">∑</span>
+      <span class="brand__text">
+        <strong>{journal.shortTitle}</strong>
+        <small>{journal.shortTitle === journal.title ? '' : journal.title}</small>
+      </span>
+    </a>
+
+    <input type="checkbox" id="navtoggle" class="navtoggle" hidden />
+    <label for="navtoggle" class="burger" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </label>
+
+    <nav class="mainnav" aria-label="Primary">
+      <ul>
+        {nav.map((item) => (
+          <li>
+            <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <a class="btn btn--gold nav-submit" href={ojs.submit}>Submit Manuscript</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--green-900);
+    border-bottom: 3px solid var(--sand-500);
+  }
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 64px; }
+  .brand { display: flex; align-items: center; gap: .6rem; color: #fff; flex: 0 0 auto; }
+  .brand:hover { text-decoration: none; }
+  .brand__mark {
+    font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700;
+    width: 38px; height: 38px; display: grid; place-items: center; flex: 0 0 auto;
+    background: var(--sand-500); color: var(--green-900); border-radius: 8px;
+  }
+  .brand__text { display: flex; flex-direction: column; line-height: 1.05; min-width: 0; }
+  .brand__text strong { font-size: 1.1rem; letter-spacing: .02em; }
+  .brand__text small {
+    font-size: .68rem; color: var(--sand-300); white-space: nowrap;
+    overflow: hidden; text-overflow: ellipsis; max-width: 26ch;
+  }
+
+  .mainnav { display: flex; align-items: center; gap: .6rem; min-width: 0; }
+  .mainnav ul {
+    display: flex; gap: .1rem; list-style: none; margin: 0; padding: 0;
+    flex-wrap: nowrap;            /* never wrap to a second row */
+  }
+  .mainnav a {
+    color: #e9f1ec; font-size: .88rem; font-weight: 500; padding: .4rem .5rem;
+    border-radius: 6px; white-space: nowrap;
+  }
+  .mainnav a:hover { background: var(--green-800); color: #fff; text-decoration: none; }
+  .mainnav a[aria-current="page"] { color: var(--sand-300); background: var(--green-800); }
+  .nav-submit { padding: .48rem .85rem; font-size: .88rem; margin-left: .35rem; flex: 0 0 auto; }
+
+  .navtoggle, .burger { display: none; }
+  .burger { flex-direction: column; gap: 5px; cursor: pointer; padding: .5rem; }
+  .burger span { width: 26px; height: 3px; background: #fff; border-radius: 2px; }
+
+  /* hide the long subtitle a bit before the menu collapses, to free nav room */
+  @media (max-width: 1180px) { .brand__text small { display: none; } }
+
+  /* collapse to a menu button before the row would overflow the container */
+  @media (max-width: 1100px) {
+    .burger { display: flex; }
+    .mainnav {
+      position: absolute; inset: 67px 0 auto 0; flex-direction: column; align-items: stretch;
+      background: var(--green-900); padding: 1rem 1.25rem 1.5rem; gap: .6rem;
+      border-bottom: 3px solid var(--sand-500); display: none;
+    }
+    .navtoggle:checked ~ .mainnav { display: flex; }
+    .mainnav ul { flex-direction: column; gap: .15rem; }
+    .mainnav a { padding: .6rem; font-size: 1rem; }
+    .nav-submit { align-self: flex-start; margin-left: 0; margin-top: .3rem; }
+  }
+</style>

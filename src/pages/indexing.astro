@@ -1,0 +1,154 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { journal, indexing } from '../data/site';
+---
+
+<Base
+  title="Indexing & Abstracting"
+  description="Learn how the Algerian Journal of Applied Mathematics (AJAM) maximises the discoverability of its open-access content through indexing in major mathematics databases, metadata standards, and interoperability protocols."
+>
+  <PageHeader
+    eyebrow="Visibility"
+    title="Indexing & Abstracting"
+    subtitle="AJAM is committed to ensuring that every published article reaches the widest possible audience through comprehensive indexing, open metadata, and interoperability standards."
+  />
+
+  <!-- INTRODUCTION -->
+  <section class="section">
+    <div class="container prose">
+      <p class="lead">
+        The <strong>{journal.title}</strong> (AJAM) is committed to maximising the discoverability
+        of its open-access content. To that end, the journal adheres to established metadata
+        standards — including OAI-PMH exposure via its Open Journal Systems (OJS) platform and
+        planned Crossref DOI registration — and actively pursues indexing in the major mathematics
+        and scientific databases. Broad, reliable indexing ensures that AJAM articles are
+        retrievable by researchers, librarians, and automated aggregators worldwide, multiplying the
+        impact of each published work.
+      </p>
+    </div>
+  </section>
+
+  <!-- CURRENTLY INDEXED -->
+  <section class="section section--alt">
+    <div class="container">
+      <p class="eyebrow">Active coverage</p>
+      <h2>Currently indexed in</h2>
+      <p class="lead" style="margin-bottom:2rem">
+        The following databases and platforms currently index AJAM articles.
+      </p>
+      <div class="grid grid--2 current-grid">
+        {indexing.current.map((db) => (
+          <div class="card card--accent current-card">
+            <h3 class="db-name">{db.name}</h3>
+            <p class="muted db-note">{db.note}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLIED FOR / IN PROGRESS -->
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Pending evaluation</p>
+      <h2>Indexing in progress / applied for</h2>
+      <p style="margin-bottom:1.5rem">
+        AJAM has submitted applications to, or is preparing applications for, the following
+        databases and registries:
+      </p>
+      <div class="tags-row">
+        {indexing.appliedFor.map((db) => (
+          <span class="tag">{db.name}</span>
+        ))}
+      </div>
+      <p class="muted" style="margin-top:1.25rem">
+        Inclusion in each database is subject to the independent evaluation criteria, timelines, and
+        eligibility requirements of the respective organisation. AJAM will update this page as new
+        listings are confirmed.
+      </p>
+    </div>
+  </section>
+
+  <!-- METADATA & INTEROPERABILITY -->
+  <section class="section section--alt">
+    <div class="container prose">
+      <p class="eyebrow">Open standards</p>
+      <h2>Metadata &amp; interoperability</h2>
+      <p>
+        AJAM implements open metadata and interoperability standards to facilitate harvesting by
+        databases, search engines, and institutional repositories:
+      </p>
+      <ul>
+        <li>
+          <strong>OAI-PMH endpoint.</strong> The OJS platform exposes a standard Open Archives
+          Initiative Protocol for Metadata Harvesting (OAI-PMH) endpoint, enabling automated
+          metadata retrieval by any compliant harvester.
+        </li>
+        <li>
+          <strong>Dublin Core metadata.</strong> All article records are described using Dublin Core
+          metadata elements, ensuring broad compatibility with aggregators and institutional
+          repositories.
+        </li>
+        <li>
+          <strong>Google Scholar harvesting.</strong> AJAM article pages include structured
+          meta-tags that allow Google Scholar to index full bibliographic records and link to
+          full-text PDFs.
+        </li>
+        <li>
+          <strong>Crossref DOI registration (planned).</strong> The journal is working towards
+          membership of Crossref to assign persistent Digital Object Identifiers (DOIs) to all
+          published articles, guaranteeing stable long-term citation links.
+        </li>
+        <li>
+          <strong>ORCID support for authors.</strong> Authors are encouraged to connect their ORCID
+          iD at submission; OJS supports ORCID authentication to ensure unambiguous author
+          identification and automatic population of publication records in author profiles.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CONTACT NOTICE -->
+  <section class="section">
+    <div class="container">
+      <div class="notice">
+        <strong>Indexing services and librarians:</strong> If you represent a database, abstracting
+        service, or institutional repository and wish to harvest AJAM content, please contact the
+        editorial office at <a href="mailto:editor.ajam@univ-ouargla.dz">editor.ajam@univ-ouargla.dz</a>
+        for OAI-PMH endpoint details, metadata format specifications, and harvesting agreements.
+        We welcome partnerships that extend the reach of open mathematical scholarship.
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .current-grid {
+    margin-top: 0;
+  }
+
+  .current-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .db-name {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .db-note {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+
+  .tags-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+</style>

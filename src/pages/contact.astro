@@ -1,0 +1,205 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { journal, contact, ojs } from '../data/site';
+---
+
+<Base
+  title="Contact"
+  description={`Contact the editorial office of the ${journal.title}. Reach us by post, email, or phone, or use our online submission platform.`}
+>
+  <PageHeader
+    eyebrow="Get in touch"
+    title="Contact"
+    subtitle="We welcome enquiries from authors, reviewers, and readers. For manuscript submission and status updates, please use the OJS platform."
+  />
+
+  <section class="section">
+    <div class="container">
+
+      <!-- Submission notice -->
+      <div class="notice">
+        <strong>Manuscript submission and status enquiries</strong> must be handled through the Open Journal Systems (OJS) platform, not by email.
+        <a href={ojs.submit}>Submit a manuscript</a> &nbsp;|&nbsp;
+        <a href={ojs.login}>Log in to OJS</a>
+      </div>
+
+      <div class="grid grid--2" style="margin-top: var(--sp-8, 2rem);">
+
+        <!-- Left column: contact details -->
+        <div class="card">
+          <p class="eyebrow">Editorial office</p>
+          <h2 style="font-size: 1.15rem; margin-bottom: 1rem;">{journal.title}</h2>
+
+          <dl class="contact-list">
+            <dt>Postal address</dt>
+            <dd>
+              <address>
+                {contact.addressLines.map((line, i) => (
+                  <>
+                    {line}{i < contact.addressLines.length - 1 ? <br /> : null}
+                  </>
+                ))}
+              </address>
+            </dd>
+
+            <dt>General enquiries</dt>
+            <dd>
+              <a href={`mailto:${contact.email}`}>{contact.email}</a>
+            </dd>
+
+            <dt>Editorial office</dt>
+            <dd>
+              <a href={`mailto:${contact.editorialEmail}`}>{contact.editorialEmail}</a>
+            </dd>
+
+            <dt>Phone</dt>
+            <dd>{contact.phone}</dd>
+          </dl>
+
+          <!-- PLACEHOLDER note: all contact values above must be confirmed by the editorial office -->
+        </div>
+
+        <!-- Right column: contact form -->
+        <div class="card">
+          <p class="eyebrow">Send a message</p>
+          <h2 style="font-size: 1.15rem; margin-bottom: 0.5rem;">General enquiry form</h2>
+          <p class="muted" style="margin-bottom: 1.25rem;">
+            Use this form for general questions only. Do <strong>not</strong> submit manuscripts here.
+          </p>
+
+          <form
+            action={`mailto:${contact.email}`}
+            method="post"
+            enctype="text/plain"
+            class="contact-form"
+            novalidate
+          >
+            <div class="form-group">
+              <label for="contact-name">Full name <span aria-hidden="true">*</span></label>
+              <input
+                id="contact-name"
+                type="text"
+                name="name"
+                required
+                autocomplete="name"
+                placeholder="Your full name"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="contact-email">Email address <span aria-hidden="true">*</span></label>
+              <input
+                id="contact-email"
+                type="email"
+                name="email"
+                required
+                autocomplete="email"
+                placeholder="your@email.com"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="contact-subject">Subject <span aria-hidden="true">*</span></label>
+              <input
+                id="contact-subject"
+                type="text"
+                name="subject"
+                required
+                placeholder="Brief description of your enquiry"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="contact-message">Message <span aria-hidden="true">*</span></label>
+              <textarea
+                id="contact-message"
+                name="message"
+                rows="5"
+                required
+                placeholder="Please describe your enquiry in detail."
+              ></textarea>
+            </div>
+
+            <button type="submit" class="btn btn--primary">Send message</button>
+          </form>
+
+          <p class="muted" style="margin-top: 1rem; font-size: 0.85rem;">
+            This form opens your default email client. A server-side contact form may replace this in a future release.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contact-list {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.5rem 1.25rem;
+    margin: 0;
+  }
+
+  .contact-list dt {
+    font-weight: 600;
+    color: var(--color-text-muted, #6b7280);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding-top: 0.15rem;
+  }
+
+  .contact-list dd {
+    margin: 0;
+  }
+
+  address {
+    font-style: normal;
+    line-height: 1.7;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .form-group label {
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--color-border, #d1d5db);
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: inherit;
+    background: var(--color-surface, #fff);
+    color: var(--color-text, #111);
+    box-sizing: border-box;
+    transition: border-color 0.15s;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-accent, #1d4ed8);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent, #1d4ed8) 20%, transparent);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 7rem;
+  }
+</style>

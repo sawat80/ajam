@@ -1,0 +1,253 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { journal, ojs } from '../data/site';
+---
+
+<Base
+  title="Issues"
+  description="Browse issues and the archive of the Algerian Journal of Applied Mathematics (AJAM). Full article texts are hosted on the AJAM Open Journal Systems platform."
+>
+  <PageHeader
+    eyebrow="Read"
+    title="Issues & Archive"
+    subtitle="Full-text articles are hosted on the AJAM Open Journal Systems platform. This page summarises available issues and provides direct links into OJS."
+  />
+
+  <!-- INTRODUCTION -->
+  <section class="section">
+    <div class="container prose">
+      <p class="lead">
+        The complete text of all {journal.shortTitle} articles — including PDFs, supplementary
+        materials, and bibliographic metadata — is hosted on the
+        <strong>{journal.title}</strong> Open Journal Systems (OJS) platform. The sections below
+        summarise published and forthcoming issues and link directly into OJS for reading,
+        downloading, and citing individual articles.
+      </p>
+    </div>
+  </section>
+
+  <!-- CURRENT ISSUE -->
+  <section class="section section--alt">
+    <div class="container">
+      <p class="eyebrow">Latest</p>
+      <h2>Current Issue</h2>
+
+      <div class="card card--accent current-issue-card">
+        <div class="current-issue-card__header">
+          <span class="tag">Inaugural Issue</span>
+          <span class="tag tag--gold">Forthcoming</span>
+        </div>
+        <h3 class="current-issue-card__title">
+          Volume 1, Issue 1 &mdash; Forthcoming ({journal.foundedYear})
+        </h3>
+        <p>
+          This is the inaugural issue of the <em>{journal.title}</em>, established in{' '}
+          {journal.foundedYear}. Published by the {journal.publisher} at{' '}
+          {journal.institution}, it marks the launch of a new diamond open-access venue
+          for applied and computational mathematics research in Algeria and beyond.
+          Articles accepted through peer review will appear in this issue upon
+          completion of the editorial process.
+        </p>
+        <a class="btn btn--gold" href={ojs.currentIssue}>
+          View current issue in OJS &rarr;
+        </a>
+      </div>
+
+      <div class="notice" style="margin-top: 1.5rem;">
+        <strong>The journal is newly established and the first issue is currently in
+        preparation.</strong> We are actively conducting peer review of submitted manuscripts.
+        Researchers in applied and computational mathematics are warmly invited to contribute
+        original work. Please visit the{' '}
+        <a href="/for-authors/">For Authors</a> page for submission guidelines, LaTeX
+        template, and review timelines. Submissions are handled through our OJS platform
+        free of charge.
+      </div>
+    </div>
+  </section>
+
+  <!-- ARCHIVE -->
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">All issues</p>
+      <h2>Browse the Archive</h2>
+      <p>
+        The full archive of {journal.shortTitle} issues — including all published volumes,
+        individual article PDFs, and associated metadata — is available through the OJS
+        platform.
+      </p>
+      <p>
+        <a class="btn btn--primary" href={ojs.archive}>Full archive in OJS &rarr;</a>
+      </p>
+
+      <div class="divider"></div>
+
+      <h3>Planned publication schedule</h3>
+      <p class="muted">
+        {journal.shortTitle} publishes two issues per year: Issue 1 in June and Issue 2 in
+        December. The table below reflects the planned schedule starting from the journal's
+        founding year ({journal.foundedYear}). Statuses will be updated as issues are
+        prepared and released.
+      </p>
+
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Volume</th>
+              <th>Issue</th>
+              <th>Period</th>
+              <th>Expected date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Volume 1</td>
+              <td>Issue 1</td>
+              <td>{journal.foundedYear}</td>
+              <td>June {journal.foundedYear}</td>
+              <td><span class="tag tag--gold">Forthcoming</span></td>
+            </tr>
+            <tr>
+              <td>Volume 1</td>
+              <td>Issue 2</td>
+              <td>{journal.foundedYear}</td>
+              <td>December {journal.foundedYear}</td>
+              <td><span class="tag tag--muted">Planned</span></td>
+            </tr>
+            <tr>
+              <td>Volume 2</td>
+              <td>Issue 1</td>
+              <td>{journal.foundedYear + 1}</td>
+              <td>June {journal.foundedYear + 1}</td>
+              <td><span class="tag tag--muted">Planned</span></td>
+            </tr>
+            <tr>
+              <td>Volume 2</td>
+              <td>Issue 2</td>
+              <td>{journal.foundedYear + 1}</td>
+              <td>December {journal.foundedYear + 1}</td>
+              <td><span class="tag tag--muted">Planned</span></td>
+            </tr>
+            <tr>
+              <td>Volume 3</td>
+              <td>Issue 1</td>
+              <td>{journal.foundedYear + 2}</td>
+              <td>June {journal.foundedYear + 2}</td>
+              <td><span class="tag tag--muted">Planned</span></td>
+            </tr>
+            <tr>
+              <td>Volume 3</td>
+              <td>Issue 2</td>
+              <td>{journal.foundedYear + 2}</td>
+              <td>December {journal.foundedYear + 2}</td>
+              <td><span class="tag tag--muted">Planned</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW TO CITE -->
+  <section class="section section--alt">
+    <div class="container prose">
+      <p class="eyebrow">Citation</p>
+      <h2>How to cite {journal.shortTitle} articles</h2>
+      <p>
+        Authors citing {journal.shortTitle} articles should use the bibliographic metadata
+        provided on each article's OJS page (title, authors, volume, issue, year, page
+        range). The recommended citation format follows standard academic practice for
+        mathematical journals:
+      </p>
+      <div class="card cite-example">
+        <p class="muted cite-example__label">Example format (numeric/Vancouver style)</p>
+        <p>
+          A. Author, B. Coauthor, "Title of the article," <em>{journal.title}</em>,
+          vol. 1, no. 1, pp. xx&ndash;xx, {journal.foundedYear}.
+        </p>
+      </div>
+      <div class="card cite-example" style="margin-top: 1rem;">
+        <p class="muted cite-example__label">Example format (author–year/APA style)</p>
+        <p>
+          Author, A., &amp; Coauthor, B. ({journal.foundedYear}). Title of the article.
+          <em>{journal.title}</em>, <em>1</em>(1), xx&ndash;xx.
+        </p>
+      </div>
+      <p class="muted" style="margin-top: 1.5rem;">
+        <strong>DOIs:</strong> {journal.shortTitle} plans to register Digital Object
+        Identifiers (DOIs) for all published articles through
+        <strong>Crossref</strong> once the journal is formally indexed. DOIs will be
+        displayed on each article's OJS page and should be included in citations where
+        available (e.g., <code>https://doi.org/10.XXXXX/ajam.YYYY.NNNN</code>). Until
+        DOIs are assigned, authors should cite using the OJS article URL as the persistent
+        identifier.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .current-issue-card {
+    max-width: 680px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+  }
+
+  .current-issue-card__header {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .current-issue-card__title {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+
+  .tag--gold {
+    background: var(--sand-100, #fdf8ee);
+    color: var(--sand-700, #92711a);
+    border: 1px solid var(--sand-400, #c8a96a);
+  }
+
+  .tag--muted {
+    background: var(--bg-alt, #f4f4f4);
+    color: var(--ink-soft, #666);
+    border: 1px solid var(--line, #ddd);
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    margin-top: 1rem;
+  }
+
+  .cite-example {
+    background: var(--bg-alt, #f8f8f8);
+    border: 1px solid var(--line, #ddd);
+    border-radius: var(--radius, 6px);
+    padding: 1.25rem 1.5rem;
+  }
+
+  .cite-example p {
+    margin: 0;
+  }
+
+  .cite-example__label {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem !important;
+  }
+
+  code {
+    background: var(--bg-alt, #f4f4f4);
+    border: 1px solid var(--line, #ddd);
+    border-radius: 4px;
+    padding: 0.1em 0.4em;
+    font-size: 0.88em;
+    font-family: var(--font-mono, monospace);
+    word-break: break-all;
+  }
+</style>

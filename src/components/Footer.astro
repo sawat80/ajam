@@ -1,0 +1,75 @@
+---
+import { journal, contact, nav, ojs } from '../data/site';
+const year = 2026;
+---
+
+<footer class="site-footer">
+  <div class="container foot-grid">
+    <div>
+      <h4>{journal.shortTitle}</h4>
+      <p class="muted-light">{journal.title}</p>
+      <p class="muted-light">
+        ISSN {journal.issnOnline} (Online)<br />
+        Published by the {journal.publisher},<br />
+        {journal.institution}, {journal.country}.
+      </p>
+      <p><span class="badge">Diamond Open Access</span> <span class="badge">{journal.license}</span></p>
+    </div>
+
+    <div>
+      <h4>Navigate</h4>
+      <ul class="foot-links">
+        {nav.map((i) => <li><a href={i.href}>{i.label}</a></li>)}
+      </ul>
+    </div>
+
+    <div>
+      <h4>Submission System</h4>
+      <ul class="foot-links">
+        <li><a href={ojs.submit}>Submit a manuscript</a></li>
+        <li><a href={ojs.login}>Author / Reviewer login</a></li>
+        <li><a href={ojs.register}>Register</a></li>
+        <li><a href={ojs.archive}>Browse archive</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>Contact</h4>
+      <address class="muted-light">
+        {contact.addressLines.map((l) => <span>{l}<br /></span>)}
+        <br />
+        <a href={`mailto:${contact.email}`}>{contact.email}</a>
+      </address>
+    </div>
+  </div>
+
+  <div class="foot-bottom">
+    <div class="container">
+      <span>© {year} {journal.publisher}, {journal.institution}.</span>
+      <span>Powered by Open Journal Systems · Built with Astro.</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer { background: var(--green-900); color: #d8e6df; margin-top: 4rem; }
+  .foot-grid {
+    display: grid; grid-template-columns: 1.6fr 1fr 1fr 1.4fr; gap: 2rem;
+    padding-block: 3rem 2rem;
+  }
+  @media (max-width: 860px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .foot-grid { grid-template-columns: 1fr; } }
+  .site-footer h4 { color: #fff; font-size: 1rem; margin-bottom: .8rem; }
+  .muted-light { color: #b6cabf; font-size: .9rem; line-height: 1.6; }
+  .foot-links { list-style: none; margin: 0; padding: 0; }
+  .foot-links li { margin-bottom: .4rem; }
+  .foot-links a { color: #d8e6df; font-size: .9rem; }
+  .foot-links a:hover { color: var(--sand-300); }
+  address { font-style: normal; }
+  .badge {
+    display: inline-block; font-size: .72rem; font-weight: 600; color: var(--green-900);
+    background: var(--sand-300); padding: .15rem .55rem; border-radius: 999px; margin-top: .3rem;
+  }
+  .foot-bottom { border-top: 1px solid rgba(255,255,255,.12); padding-block: 1rem; font-size: .82rem; }
+  .foot-bottom .container { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; color: #9fb6aa; }
+</style>

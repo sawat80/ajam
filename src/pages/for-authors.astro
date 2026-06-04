@@ -1,0 +1,833 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { journal, ojs, contact } from '../data/site';
+---
+
+<Base
+  title="For Authors"
+  description="Complete author guidelines for submitting to the Algerian Journal of Applied Mathematics — manuscript preparation, submission process, peer review, and open-access policy."
+>
+  <PageHeader
+    eyebrow="Submit"
+    title="For Authors"
+    subtitle="Everything you need to prepare, format, and submit your manuscript to AJAM — a Diamond Open Access journal with no publication charges."
+  />
+
+  <!-- ─────────────────────────────  INTRO + CTA  ───────────────────────────── -->
+  <section class="section">
+    <div class="container prose">
+
+      <p class="lead">
+        The <em>Algerian Journal of Applied Mathematics</em> welcomes original research articles,
+        review papers, and short communications in all areas of applied and computational
+        mathematics. Submissions are handled entirely through our Open Journal Systems (OJS)
+        platform. All published work is freely available under a{' '}
+        <strong>{journal.license}</strong> licence — with <strong>no submission fees and no
+        article processing charges</strong>.
+      </p>
+
+      <div class="cta-row">
+        <a href={ojs.submit} class="btn btn--gold">Submit via OJS</a>
+        <a href={ojs.register} class="btn btn--primary">Create an account</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─────────────────────────  BEFORE YOU SUBMIT  ────────────────────────── -->
+  <section class="section section--alt">
+    <div class="container prose">
+
+      <h2>Before You Submit</h2>
+      <p>
+        Please verify each of the following points before initiating a submission. Manuscripts
+        that do not satisfy these requirements will be returned without review.
+      </p>
+
+      <ul class="checklist">
+        <li>
+          <strong>Originality.</strong> The manuscript reports original work that has not been
+          published, posted as a preprint under embargo, or submitted concurrently to any
+          other journal or conference proceedings.
+        </li>
+        <li>
+          <strong>Author consensus.</strong> All named authors have read the final manuscript,
+          approved its submission to AJAM, and consent to the authorship order as listed.
+        </li>
+        <li>
+          <strong>Scope alignment.</strong> The subject matter falls within the scientific scope
+          of the journal. Consult the{' '}
+          <a href="/aims-and-scope/">Aims &amp; Scope</a> page if in doubt; out-of-scope
+          submissions are desk-rejected.
+        </li>
+        <li>
+          <strong>Ethics compliance.</strong> The manuscript adheres to AJAM's publication ethics,
+          including proper attribution, data integrity, conflict-of-interest disclosure, and —
+          where applicable — informed consent and ethical approval. See our{' '}
+          <a href="/policies/">Ethics &amp; Policies</a> page for full details.
+        </li>
+        <li>
+          <strong>English language quality.</strong> The manuscript is written in clear, grammatically
+          correct English. Authors whose first language is not English are strongly encouraged to
+          have their work reviewed by a native speaker or a professional editing service before
+          submission. Poor language quality is grounds for desk rejection.
+        </li>
+        <li>
+          <strong>Anonymisation.</strong> Because AJAM uses <strong>double-blind peer review</strong>,
+          the main manuscript file must contain no identifying information (author names,
+          affiliations, acknowledgements, self-citations in the first person). A separate
+          title-page file carrying this information must be uploaded alongside the main file.
+        </li>
+      </ul>
+
+    </div>
+  </section>
+
+  <!-- ──────────────────────────  MANUSCRIPT PREPARATION  ─────────────────── -->
+  <section class="section">
+    <div class="container">
+
+      <div class="prose">
+        <h2>Manuscript Preparation</h2>
+        <p>
+          Careful preparation shortens the review cycle and reduces the burden on editors and
+          reviewers. The guidelines below are mandatory; submissions that deviate significantly
+          may be returned before peer review.
+        </p>
+      </div>
+
+      <!-- Format -->
+      <h3 class="subsection-title">File Format</h3>
+      <div class="prose">
+        <p>
+          <strong>LaTeX is strongly preferred</strong> and produces the best typographic output.
+          Authors using LaTeX should submit a single compiled <code>.pdf</code> for review, together
+          with the full source archive (<code>.tex</code>, <code>.bib</code>, figures) in a
+          single <code>.zip</code> file. Microsoft Word submissions are accepted as an alternative
+          but may result in additional formatting work at the proof stage.
+        </p>
+
+        <div class="template-card">
+          <div class="template-card__main">
+            <span class="template-card__badge">Official template</span>
+            <h4>AJAM LaTeX Template</h4>
+            <p class="muted">
+              The journal document class with the AJAM cover banner, the
+              &Sigma; mark, the University of Ouargla logo, ready-made theorem
+              environments, and BibTeX setup. Compiles with <strong>pdfLaTeX</strong>
+              locally or on Overleaf. The download includes a fully worked,
+              compiled sample article you can copy from.
+            </p>
+            <ul class="template-includes">
+              <li><code>ajam.cls</code> — journal document class</li>
+              <li><code>ajam-template.tex</code> — worked sample manuscript</li>
+              <li><code>references.bib</code> — BibTeX bibliography</li>
+              <li><code>logos/</code> — University of Ouargla emblem</li>
+              <li><code>README</code> + compiled sample PDF</li>
+            </ul>
+          </div>
+          <div class="template-card__aside">
+            <a href="/templates/ajam-template.zip" class="btn btn--primary" download>
+              &#8623;&nbsp; Download template (.zip)
+            </a>
+            <a href="/templates/ajam-sample.pdf" class="btn btn--ghost" target="_blank" rel="noopener">
+              View sample PDF
+            </a>
+            <a href={`https://www.overleaf.com/docs?snip_uri=https://${journal.domain}/templates/ajam-template.zip`}
+               class="btn btn--ghost" target="_blank" rel="noopener">
+              Open in Overleaf
+            </a>
+            <p class="template-card__note muted">
+              For double-blind review, remove author names, affiliations and
+              acknowledgements before uploading (see the <code>README</code>).
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Structure -->
+      <h3 class="subsection-title">Required Structure</h3>
+      <div class="prose">
+        <p>
+          Manuscripts must follow the order below. All elements marked with an asterisk are
+          mandatory.
+        </p>
+      </div>
+
+      <div class="grid grid--2 structure-grid">
+
+        <div class="card">
+          <p class="struct-label">Title *</p>
+          <p class="muted">
+            Concise, informative, and free of abbreviations. Avoid phrases such as
+            "A study of…" or "On the…" where they add no information.
+          </p>
+        </div>
+
+        <div class="card">
+          <p class="struct-label">Author Names &amp; Affiliations *</p>
+          <p class="muted">
+            Full names (no initials only), institutional affiliations, country, and
+            the corresponding author's email address. Place on the <em>title page only</em>
+            — omit from the main anonymised file.
+          </p>
+        </div>
+
+        <div class="card">
+          <p class="struct-label">Abstract *</p>
+          <p class="muted">
+            A single, self-contained paragraph of <strong>at most 250 words</strong>.
+            State the problem, methodology, main results, and significance.
+            Do not include citations, figures, or undefined acronyms.
+          </p>
+        </div>
+
+        <div class="card">
+          <p class="struct-label">Keywords *</p>
+          <p class="muted">
+            Between <strong>4 and 6</strong> keywords or short phrases, separated by
+            semicolons. Choose terms that do not duplicate words already in the title.
+          </p>
+        </div>
+
+        <div class="card">
+          <p class="struct-label">MSC 2020 Classification *</p>
+          <p class="muted">
+            One or more Mathematics Subject Classification (2020) codes. At least one
+            primary code is required; secondary codes are encouraged. Consult{' '}
+            <a href="https://mathscinet.ams.org/msc/msc2020.html" target="_blank" rel="noopener">
+              mathscinet.ams.org/msc/msc2020.html
+            </a>.
+          </p>
+        </div>
+
+        <div class="card">
+          <p class="struct-label">Main Text *</p>
+          <p class="muted">
+            Introduction, background/related work, methods, results, discussion, and
+            conclusion. Use clear section and subsection headings. There is no strict
+            page limit, but concision is valued.
+          </p>
+        </div>
+
+        <div class="card">
+          <p class="struct-label">Acknowledgements</p>
+          <p class="muted">
+            Funding sources, grant numbers, and personal acknowledgements. Omit from the
+            anonymised submission file; include only in the title page and in the final
+            accepted version.
+          </p>
+        </div>
+
+        <div class="card">
+          <p class="struct-label">References *</p>
+          <p class="muted">
+            Numbered in order of first citation. All references must be cited in the text.
+            See the reference style guidelines below.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Math & Notation -->
+      <h3 class="subsection-title">Mathematics, Notation &amp; Equations</h3>
+      <div class="prose">
+        <ul>
+          <li>
+            All displayed equations that are referenced in the text must be numbered
+            consecutively with arabic numerals in parentheses, flush right:
+            e.g., <code>(1)</code>, <code>(2)</code>, etc.
+          </li>
+          <li>
+            Notation must be defined at first occurrence and used consistently throughout.
+            Use standard mathematical conventions; avoid ad-hoc abbreviations.
+          </li>
+          <li>
+            Theorems, lemmas, propositions, corollaries, definitions, and remarks must be
+            numbered consecutively (e.g., Theorem 2.1) and formatted distinctly from
+            surrounding prose.
+          </li>
+          <li>
+            Proofs should end with a tombstone symbol (∎ or □). In LaTeX, use
+            <code>\qed</code> inside the <code>proof</code> environment provided by
+            <code>amsthm</code>.
+          </li>
+        </ul>
+      </div>
+
+      <!-- Figures & Tables -->
+      <h3 class="subsection-title">Figures and Tables</h3>
+      <div class="prose">
+        <ul>
+          <li>
+            <strong>Figures</strong> must be submitted as vector graphics (PDF, EPS, or SVG)
+            wherever possible. Raster images (plots, photographs) must have a minimum
+            resolution of <strong>300 dpi</strong> at final print size.
+          </li>
+          <li>
+            Each figure must have a descriptive caption placed <em>below</em> the figure.
+            Figures are numbered consecutively: Figure 1, Figure 2, …
+          </li>
+          <li>
+            <strong>Tables</strong> must have a descriptive caption placed <em>above</em>
+            the table. Tables are numbered consecutively: Table 1, Table 2, …
+            Avoid vertical rules; use horizontal rules sparingly to delineate header and
+            footer rows (in LaTeX, <code>booktabs</code> is recommended).
+          </li>
+          <li>
+            All figures and tables must be cited in the main text before they appear.
+          </li>
+          <li>
+            Colour figures are published in colour in the online version at no charge.
+            Authors should nonetheless ensure that figures remain interpretable in greyscale
+            for accessibility.
+          </li>
+        </ul>
+      </div>
+
+      <!-- References -->
+      <h3 class="subsection-title">Reference Style</h3>
+      <div class="prose">
+        <p>
+          AJAM uses a <strong>numbered reference list</strong> sorted in order of citation.
+          In-text citations take the form <code>[1]</code> or <code>[1, 3, 7]</code>.
+          Authors using LaTeX are strongly encouraged to manage references with
+          <strong>BibTeX</strong> or <strong>BibLaTeX</strong>.
+        </p>
+        <p>Example formatted references:</p>
+      </div>
+
+      <div class="card ref-examples">
+        <p class="ref-heading">Journal article</p>
+        <p class="ref-line">
+          [1] A. Author, B. Co-Author, "Title of the paper," <em>Journal Name</em>, vol. 12,
+          no. 3, pp. 45–67, 2024. https://doi.org/10.xxxx/xxxxxx
+        </p>
+        <p class="ref-heading" style="margin-top:1rem;">Book</p>
+        <p class="ref-line">
+          [2] C. Author, <em>Title of the Book</em>, 2nd ed. Publisher City: Publisher Name, 2019.
+        </p>
+        <p class="ref-heading" style="margin-top:1rem;">Book chapter</p>
+        <p class="ref-line">
+          [3] D. Author, "Chapter title," in <em>Book Title</em>, E. Editor, Ed. Publisher
+          City: Publisher Name, 2021, pp. 101–120.
+        </p>
+      </div>
+
+      <div class="prose" style="margin-top:1.25rem;">
+        <p class="muted">
+          Include DOIs whenever available. URLs for web resources should include an access date.
+          Do not include references that are not cited in the text.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ──────────────────────────  SUBMISSION PROCESS  ─────────────────────── -->
+  <section class="section section--alt">
+    <div class="container">
+
+      <div class="prose">
+        <h2>Submission Process</h2>
+        <p>
+          All submissions are handled through the AJAM OJS portal. The workflow consists
+          of five steps completed in a single session; you may save your progress and
+          return at any time before confirming the submission.
+        </p>
+        <p>
+          <strong>Double-blind review:</strong> Upload the anonymised manuscript as the
+          primary submission file. Upload the title page (with author details) as a
+          supplementary file not sent to reviewers.
+        </p>
+      </div>
+
+      <div class="grid grid--3 steps-grid" style="margin-top:2rem;">
+
+        <div class="card card--accent step-card">
+          <span class="step-number">01</span>
+          <p class="step-title">Start</p>
+          <p class="muted">
+            Log in to OJS (or <a href={ojs.register}>create a free account</a>). Navigate
+            to <em>New Submission</em>. Select the section that matches your manuscript
+            type (Article, Review, Short Communication). Read and confirm the submission
+            checklist displayed by OJS.
+          </p>
+        </div>
+
+        <div class="card card--accent step-card">
+          <span class="step-number">02</span>
+          <p class="step-title">Upload Files</p>
+          <p class="muted">
+            Upload the <strong>anonymised manuscript</strong> (PDF) as the Article Text.
+            Upload the <strong>title page</strong> as a Supplementary File (select
+            "Not for review"). Upload figures and source files as additional
+            supplementary files if required.
+          </p>
+        </div>
+
+        <div class="card card--accent step-card">
+          <span class="step-number">03</span>
+          <p class="step-title">Enter Metadata</p>
+          <p class="muted">
+            Enter the full title, abstract, keywords, MSC 2020 codes, and all author
+            details (name, affiliation, email, ORCID iD). Designate the corresponding
+            author. Declare any conflicts of interest and funding sources.
+          </p>
+        </div>
+
+        <div class="card card--accent step-card">
+          <span class="step-number">04</span>
+          <p class="step-title">Confirm</p>
+          <p class="muted">
+            Review a summary of your submission. Click <em>Finish Submission</em> to
+            transmit the manuscript to the editorial office. You will receive an
+            automated acknowledgement email immediately.
+          </p>
+        </div>
+
+        <div class="card card--accent step-card">
+          <span class="step-number">05</span>
+          <p class="step-title">Next Steps</p>
+          <p class="muted">
+            The editorial office will conduct an initial desk check within
+            approximately <strong>5–7 business days</strong>. You will be notified
+            of the outcome — acceptance into the review queue, a request for revision
+            before review, or a desk rejection — via the email address registered
+            in OJS.
+          </p>
+        </div>
+
+        <div class="card step-card step-card--tip">
+          <span class="step-number step-number--tip">TIP</span>
+          <p class="step-title">Track Your Submission</p>
+          <p class="muted">
+            Log in to OJS at any time to view the current status of your submission,
+            read editor messages, and upload revised files. All correspondence between
+            authors, editors, and reviewers is recorded in OJS.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ────────────────────────  PEER REVIEW TIMELINE  ─────────────────────── -->
+  <section class="section">
+    <div class="container">
+
+      <div class="prose">
+        <h2>After Submission — Peer Review Timeline</h2>
+        <p>
+          AJAM employs <strong>double-blind peer review</strong>: both authors and reviewers
+          remain anonymous to each other throughout the process. The table below shows
+          indicative timeframes for each stage. These are targets, not guarantees; actual
+          durations depend on the complexity of the manuscript and reviewer availability.
+          Authors are encouraged to contact the editorial office if a stage appears to have
+          stalled beyond the indicated window.
+        </p>
+        <p>
+          For information on reviewer responsibilities and criteria, see our{' '}
+          <a href="/for-reviewers/">For Reviewers</a> page.
+        </p>
+      </div>
+
+      <div class="table-wrap" style="margin-top:1.75rem;">
+        <table class="table review-table">
+          <thead>
+            <tr>
+              <th>Stage</th>
+              <th>Description</th>
+              <th>Indicative Timeframe</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Initial editorial check</strong></td>
+              <td>
+                The Editor-in-Chief or a handling editor assesses scope, format
+                compliance, language quality, and ethical requirements. Manuscripts
+                failing this check are desk-rejected with brief feedback.
+              </td>
+              <td>5–7 business days</td>
+            </tr>
+            <tr>
+              <td><strong>Assignment to reviewers</strong></td>
+              <td>
+                The handling editor identifies and invites at least two independent
+                subject-matter experts. Reviewer invitation and acceptance may take
+                several weeks depending on availability.
+              </td>
+              <td>1–3 weeks</td>
+            </tr>
+            <tr>
+              <td><strong>Reviews returned</strong></td>
+              <td>
+                Reviewers are asked to submit their reports within four weeks of
+                accepting the invitation. A reminder is sent at the three-week mark.
+              </td>
+              <td>4–6 weeks</td>
+            </tr>
+            <tr>
+              <td><strong>Editorial decision</strong></td>
+              <td>
+                The handling editor evaluates the reports and issues one of four
+                decisions: Accept, Minor Revision, Major Revision, or Reject.
+                The decision letter includes all reviewer comments.
+              </td>
+              <td>1–2 weeks after reviews</td>
+            </tr>
+            <tr>
+              <td><strong>Revision (if required)</strong></td>
+              <td>
+                Authors are given a defined period — <strong>4 weeks</strong> for minor
+                revisions, <strong>8 weeks</strong> for major revisions — to submit a
+                revised manuscript together with a point-by-point response to reviewers.
+                Extensions may be requested.
+              </td>
+              <td>4–8 weeks (author's time)</td>
+            </tr>
+            <tr>
+              <td><strong>Final decision</strong></td>
+              <td>
+                Revised manuscripts are re-evaluated, sometimes by the original reviewers.
+                After acceptance, the manuscript proceeds to production. Further rounds of
+                revision are possible but uncommon.
+              </td>
+              <td>1–3 weeks after resubmission</td>
+            </tr>
+            <tr>
+              <td><strong>Total (typical)</strong></td>
+              <td>
+                For manuscripts requiring one round of revision; faster for straightforward
+                cases, longer for substantial revisions.
+              </td>
+              <td><strong>~3–5 months</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ──────────────────────────  FEES & OPEN ACCESS  ─────────────────────── -->
+  <section class="section section--alt">
+    <div class="container">
+
+      <div class="prose">
+        <h2>Fees &amp; Open Access</h2>
+      </div>
+
+      <div class="notice notice--gold">
+        <p class="notice-headline">Diamond Open Access — Completely Free to Read and to Publish</p>
+        <p>
+          AJAM operates under the <strong>Diamond Open Access</strong> model. This means:
+        </p>
+        <ul>
+          <li>
+            <strong>No submission fee.</strong> Authors pay nothing to submit a manuscript,
+            regardless of the outcome.
+          </li>
+          <li>
+            <strong>No article processing charge (APC).</strong> Accepted articles are
+            published online at no cost to authors or their institutions.
+          </li>
+          <li>
+            <strong>Immediate open access.</strong> All content is freely and permanently
+            available to anyone worldwide from the moment of publication — no embargo period,
+            no paywall.
+          </li>
+          <li>
+            <strong>Author copyright retention.</strong> Authors retain full copyright over
+            their published work. AJAM publishes articles under the{' '}
+            <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">
+              Creative Commons Attribution 4.0 International ({journal.license})
+            </a>{' '}
+            licence. This allows anyone to share and adapt the material for any purpose,
+            provided appropriate credit is given.
+          </li>
+        </ul>
+        <p class="muted" style="margin-top:1rem;">
+          AJAM's Diamond Open Access model is made possible by the support of the Laboratory
+          of Applied Mathematics and Kasdi Merbah University, Ouargla. There are no
+          third-party commercial interests.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────  POST-ACCEPTANCE  ─────────────────────── -->
+  <section class="section">
+    <div class="container prose">
+
+      <h2>Post-Acceptance</h2>
+      <p>
+        Once a manuscript has been formally accepted, it enters the production workflow.
+        The following steps apply:
+      </p>
+
+      <ol class="post-accept-list">
+        <li>
+          <strong>Author proofs.</strong> The corresponding author receives a PDF proof
+          for correction. Proofs should be returned within <strong>five business days</strong>.
+          Only typographical corrections and minor factual errors should be made at this
+          stage; substantive changes to content are not permitted after acceptance.
+        </li>
+        <li>
+          <strong>DOI assignment.</strong> A Digital Object Identifier (DOI) will be
+          assigned to the final published version. DOI registration via Crossref is planned
+          as part of AJAM's indexing roadmap; authors will be notified of the assigned DOI
+          at the point of publication.
+        </li>
+        <li>
+          <strong>Online publication.</strong> The corrected article is formatted, assigned
+          to an issue, and published on the OJS platform. AJAM publishes two regular issues
+          per year (June and December); accepted articles are assigned to the next available
+          issue in order of acceptance date.
+        </li>
+        <li>
+          <strong>Metadata dissemination.</strong> Bibliographic metadata (title, authors,
+          abstract, keywords, MSC codes) is disseminated to Google Scholar and the Algerian
+          Scientific Journals Platform (ASJP). Authors are encouraged to deposit their
+          accepted manuscript in their institutional repository and to link their publication
+          from their ORCID profile.
+        </li>
+      </ol>
+
+    </div>
+  </section>
+
+  <!-- ───────────────────────────  CLOSING CTA  ────────────────────────────── -->
+  <section class="section section--alt">
+    <div class="container center">
+
+      <p class="lead" style="max-width:640px; margin-inline:auto;">
+        Ready to submit your work to AJAM? Create a free account on our OJS platform and
+        begin your submission today. For any questions not addressed on this page, the
+        editorial team is happy to assist.
+      </p>
+
+      <div class="cta-row cta-row--centered" style="margin-top:2rem;">
+        <a href={ojs.submit} class="btn btn--gold">Submit via OJS</a>
+        <a href={`mailto:${contact.editorialEmail}`} class="btn btn--primary">
+          Contact the Editorial Office
+        </a>
+      </div>
+
+      <p class="muted" style="margin-top:1.25rem; font-size:0.9rem;">
+        You can also reach us by email at{' '}
+        <a href={`mailto:${contact.editorialEmail}`}>{contact.editorialEmail}</a>.
+      </p>
+
+    </div>
+  </section>
+
+</Base>
+
+<style>
+  /* ── CTA row ── */
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .cta-row--centered {
+    justify-content: center;
+  }
+
+  /* ── Checklist ── */
+  .checklist {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .checklist li {
+    padding-left: 1.75rem;
+    position: relative;
+  }
+
+  .checklist li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--color-gold, #c9a84c);
+    font-weight: 700;
+  }
+
+  /* ── Subsection headings ── */
+  .subsection-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--color-border, #e5e7eb);
+    padding-bottom: 0.4rem;
+  }
+
+  /* ── Template card ── */
+  .template-card {
+    margin-top: 1.5rem;
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 1.5rem;
+    background: var(--bg-alt, #faf7f0);
+    border: 1px solid var(--line, #e3e0d7);
+    border-left: 5px solid var(--green-700, #1b6b4f);
+    border-radius: var(--radius, 10px);
+    padding: 1.4rem 1.5rem;
+    box-shadow: var(--shadow, 0 8px 24px rgba(15,61,46,.07));
+  }
+  .template-card__badge {
+    display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--green-800, #14543f);
+    background: var(--sand-300, #e2cfa3); padding: .2rem .6rem; border-radius: 999px;
+  }
+  .template-card h4 { margin: .6rem 0 .4rem; color: var(--green-900, #0f3d2e); font-size: 1.25rem; }
+  .template-includes {
+    margin: .8rem 0 0; padding-left: 1.1rem; columns: 1; font-size: .92rem;
+  }
+  .template-includes li { margin-bottom: .25rem; }
+  .template-includes code { font-size: .85em; }
+  .template-card__aside {
+    display: flex; flex-direction: column; gap: .6rem; align-self: start;
+    border-left: 1px solid var(--line, #e3e0d7); padding-left: 1.5rem;
+  }
+  .template-card__aside .btn { width: 100%; justify-content: center; }
+  .template-card__note { font-size: .82rem; margin: .4rem 0 0; }
+
+  @media (max-width: 760px) {
+    .template-card { grid-template-columns: 1fr; }
+    .template-card__aside { border-left: 0; padding-left: 0; border-top: 1px solid var(--line,#e3e0d7); padding-top: 1rem; }
+  }
+
+  /* ── Structure grid ── */
+  .structure-grid {
+    margin-top: 1.25rem;
+  }
+
+  .struct-label {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+    color: var(--color-heading, #111827);
+  }
+
+  /* ── Reference examples card ── */
+  .ref-examples {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .ref-heading {
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-muted, #6b7280);
+    margin-bottom: 0.35rem;
+  }
+
+  .ref-line {
+    line-height: 1.65;
+  }
+
+  /* ── Steps grid ── */
+  .steps-grid {
+    gap: 1.25rem;
+  }
+
+  .step-card {
+    position: relative;
+    padding-top: 1.5rem;
+  }
+
+  .step-number {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    background: var(--color-gold, #c9a84c);
+    color: #fff;
+    padding: 0.15rem 0.55rem;
+    border-radius: 3px;
+    margin-bottom: 0.6rem;
+  }
+
+  .step-number--tip {
+    background: var(--color-accent, #1d4ed8);
+  }
+
+  .step-card--tip {
+    border-style: dashed;
+  }
+
+  .step-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  /* ── Review table ── */
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .review-table td:first-child {
+    white-space: nowrap;
+    min-width: 200px;
+  }
+
+  .review-table td:last-child,
+  .review-table th:last-child {
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  /* ── Open access notice ── */
+  .notice--gold {
+    border-left-color: var(--color-gold, #c9a84c);
+  }
+
+  .notice-headline {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--color-heading, #111827);
+  }
+
+  /* ── Post-acceptance ordered list ── */
+  .post-accept-list {
+    padding-left: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    margin-top: 1rem;
+  }
+
+  .post-accept-list li {
+    line-height: 1.7;
+  }
+
+  /* ── Responsive: stack CTAs on small screens ── */
+  @media (max-width: 480px) {
+    .cta-row {
+      flex-direction: column;
+    }
+
+    .cta-row .btn {
+      text-align: center;
+    }
+  }
+</style>
