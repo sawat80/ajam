@@ -1,5 +1,6 @@
 ---
 import { journal, contact, nav, ojs } from '../data/site';
+import { u } from '../lib/url';
 const year = 2026;
 ---
 
@@ -19,17 +20,17 @@ const year = 2026;
     <div>
       <h4>Navigate</h4>
       <ul class="foot-links">
-        {nav.map((i) => <li><a href={i.href}>{i.label}</a></li>)}
+        {nav.map((i) => <li><a href={u(i.href)}>{i.label}</a></li>)}
       </ul>
     </div>
 
     <div>
       <h4>Submission System</h4>
       <ul class="foot-links">
-        <li><a href={ojs.submit}>Submit a manuscript</a></li>
-        <li><a href={ojs.login}>Author / Reviewer login</a></li>
-        <li><a href={ojs.register}>Register</a></li>
-        <li><a href={ojs.archive}>Browse archive</a></li>
+        <li><a href={u(ojs.submit)}>Submit a manuscript</a></li>
+        <li><a href={u(ojs.login)}>Author / Reviewer login</a></li>
+        <li><a href={u(ojs.register)}>Register</a></li>
+        <li><a href={u(ojs.archive)}>Browse archive</a></li>
       </ul>
     </div>
 

@@ -2,6 +2,9 @@
 import Base from '../layouts/Base.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { journal, ojs, contact } from '../data/site';
+import { u } from '../lib/url';
+const zipUrl = new URL(u('/templates/ajam-template.zip'), Astro.site).href;
+const overleafUrl = `https://www.overleaf.com/docs?snip_uri=${encodeURIComponent(zipUrl)}`;
 ---
 
 <Base
@@ -58,14 +61,14 @@ import { journal, ojs, contact } from '../data/site';
         <li>
           <strong>Scope alignment.</strong> The subject matter falls within the scientific scope
           of the journal. Consult the{' '}
-          <a href="/aims-and-scope/">Aims &amp; Scope</a> page if in doubt; out-of-scope
+          <a href={u('/aims-and-scope/')}>Aims &amp; Scope</a> page if in doubt; out-of-scope
           submissions are desk-rejected.
         </li>
         <li>
           <strong>Ethics compliance.</strong> The manuscript adheres to AJAM's publication ethics,
           including proper attribution, data integrity, conflict-of-interest disclosure, and —
           where applicable — informed consent and ethical approval. See our{' '}
-          <a href="/policies/">Ethics &amp; Policies</a> page for full details.
+          <a href={u('/policies/')}>Ethics &amp; Policies</a> page for full details.
         </li>
         <li>
           <strong>English language quality.</strong> The manuscript is written in clear, grammatically
@@ -128,14 +131,13 @@ import { journal, ojs, contact } from '../data/site';
             </ul>
           </div>
           <div class="template-card__aside">
-            <a href="/templates/ajam-template.zip" class="btn btn--primary" download>
+            <a href={u('/templates/ajam-template.zip')} class="btn btn--primary" download>
               &#8623;&nbsp; Download template (.zip)
             </a>
-            <a href="/templates/ajam-sample.pdf" class="btn btn--ghost" target="_blank" rel="noopener">
+            <a href={u('/templates/ajam-sample.pdf')} class="btn btn--ghost" target="_blank" rel="noopener">
               View sample PDF
             </a>
-            <a href={`https://www.overleaf.com/docs?snip_uri=https://${journal.domain}/templates/ajam-template.zip`}
-               class="btn btn--ghost" target="_blank" rel="noopener">
+            <a href={overleafUrl} class="btn btn--ghost" target="_blank" rel="noopener">
               Open in Overleaf
             </a>
             <p class="template-card__note muted">
@@ -430,7 +432,7 @@ import { journal, ojs, contact } from '../data/site';
         </p>
         <p>
           For information on reviewer responsibilities and criteria, see our{' '}
-          <a href="/for-reviewers/">For Reviewers</a> page.
+          <a href={u('/for-reviewers/')}>For Reviewers</a> page.
         </p>
       </div>
 

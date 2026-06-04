@@ -1,0 +1,43 @@
+name: Deploy site to GitHub Pages
+
+# Builds the Astro static site and publishes it to GitHub Pages.
+# NOTE: GitHub Pages is static-only — it does NOT run OJS. The journal's
+# submission system must be self-hosted separately (see docker-compose.yml /
+# docs/OJS-SETUP.md); the site links to it via OJS_PUBLIC in src/data/site.ts.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment; don't cancel an in-progress production run.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      # withastro/action installs deps, runs `astro build`, and uploads the
+      # Pages artifact. The site base path (/ajam) comes from astro.config.mjs.
+      - name: Build with Astro
+        uses: withastro/action@v3
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

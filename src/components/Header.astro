@@ -1,13 +1,16 @@
 ---
 import { journal, nav, ojs } from '../data/site';
+import { u } from '../lib/url';
 const path = Astro.url.pathname;
-const isActive = (href: string) =>
-  href === '/' ? path === '/' : path.startsWith(href);
+const isActive = (href: string) => {
+  const full = u(href);
+  return href === '/' ? path === full || path === full + '/' : path.startsWith(full);
+};
 ---
 
 <header class="site-header">
   <div class="container bar">
-    <a class="brand" href="/">
+    <a class="brand" href={u('/')}>
       <span class="brand__mark" aria-hidden="true">∑</span>
       <span class="brand__text">
         <strong>{journal.shortTitle}</strong>
@@ -24,13 +27,13 @@ const isActive = (href: string) =>
       <ul>
         {nav.map((item) => (
           <li>
-            <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+            <a href={u(item.href)} aria-current={isActive(item.href) ? 'page' : undefined}>
               {item.label}
             </a>
           </li>
         ))}
       </ul>
-      <a class="btn btn--gold nav-submit" href={ojs.submit}>Submit Manuscript</a>
+      <a class="btn btn--gold nav-submit" href={u(ojs.submit)}>Submit Manuscript</a>
     </nav>
   </div>
 </header>

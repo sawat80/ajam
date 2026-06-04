@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { ojs } from '../data/site';
+import { u } from '../lib/url';
 ---
 
 <Base title="Page not found">
@@ -13,7 +14,7 @@ import { ojs } from '../data/site';
         It may have been moved, removed, or the address may have been mistyped.
       </p>
       <div class="error-actions">
-        <a href="/" class="btn btn--primary">Return home</a>
+        <a href={u('/')} class="btn btn--primary">Return home</a>
         <a href={ojs.submit} class="btn btn--gold">Submit a manuscript</a>
       </div>
     </div>

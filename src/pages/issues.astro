@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { journal, ojs } from '../data/site';
+import { u } from '../lib/url';
 ---
 
 <Base
@@ -59,7 +60,7 @@ import { journal, ojs } from '../data/site';
         preparation.</strong> We are actively conducting peer review of submitted manuscripts.
         Researchers in applied and computational mathematics are warmly invited to contribute
         original work. Please visit the{' '}
-        <a href="/for-authors/">For Authors</a> page for submission guidelines, LaTeX
+        <a href={u('/for-authors/')}>For Authors</a> page for submission guidelines, LaTeX
         template, and review timelines. Submissions are handled through our OJS platform
         free of charge.
       </div>

@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { journal, subjects, ojs, indexing } from '../data/site';
+import { u } from '../lib/url';
 ---
 
 <Base>
@@ -18,7 +19,7 @@ import { journal, subjects, ojs, indexing } from '../data/site';
       </div>
       <div class="hero__cta">
         <a class="btn btn--gold" href={ojs.submit}>Submit Your Manuscript →</a>
-        <a class="btn btn--ghost btn--ghost-hero" href="/aims-and-scope/">Read Aims &amp; Scope</a>
+        <a class="btn btn--ghost btn--ghost-hero" href={u('/aims-and-scope/')}>Read Aims &amp; Scope</a>
       </div>
     </div>
   </section>
@@ -65,7 +66,7 @@ import { journal, subjects, ojs, indexing } from '../data/site';
           community without financial barriers to authors or readers.
         </p>
         <p>
-          <a class="btn btn--primary" href="/for-authors/">Author guidelines</a>
+          <a class="btn btn--primary" href={u('/for-authors/')}>Author guidelines</a>
         </p>
       </div>
       <aside class="factbox">
@@ -97,7 +98,7 @@ import { journal, subjects, ojs, indexing } from '../data/site';
           </div>
         ))}
       </div>
-      <p style="margin-top:1.5rem"><a href="/aims-and-scope/">See full aims &amp; scope →</a></p>
+      <p style="margin-top:1.5rem"><a href={u('/aims-and-scope/')}>See full aims &amp; scope →</a></p>
     </div>
   </section>
 
@@ -127,7 +128,7 @@ import { journal, subjects, ojs, indexing } from '../data/site';
         {indexing.current.map((i) => <span class="tag">{i.name}</span>)}
       </div>
       <p class="muted" style="margin-top:1rem">Applications submitted to DOAJ, zbMATH, MathSciNet, Scopus &amp; Crossref.</p>
-      <p><a href="/indexing/">Indexing details →</a></p>
+      <p><a href={u('/indexing/')}>Indexing details →</a></p>
     </div>
   </section>
 </Base>

@@ -33,18 +33,25 @@ export const journal = {
  * the journal-scoped links (submit / issues) will 404 — login/register work
  * immediately.
  */
-const OJS_BASE = '/ojs';
+// OJS is a PHP app and CANNOT run on GitHub Pages — it must be self-hosted
+// separately (the Docker stack in docker-compose.yml). On the static site these
+// links are ABSOLUTE to that external OJS host. Set OJS_PUBLIC to your real OJS
+// URL (no trailing slash). Examples:
+//   own subdomain (root):   https://ojs.univ-ouargla.dz   → paths below have no /ojs prefix
+//   same domain subpath:    https://ajam.univ-ouargla.dz/ojs
+// If you host OJS at a /ojs subpath, append "/ojs" here AND keep the paths.
+const OJS_PUBLIC = 'https://ojs.univ-ouargla.dz';
 const OJS_JOURNAL = 'ajam';
 export const ojs = {
-  base: OJS_BASE,
+  base: OJS_PUBLIC,
   journalPath: OJS_JOURNAL,
   // site-level (work as soon as OJS is installed)
-  login: `${OJS_BASE}/index/login`,
-  register: `${OJS_BASE}/index/user/register`,
+  login: `${OJS_PUBLIC}/index/login`,
+  register: `${OJS_PUBLIC}/index/user/register`,
   // journal-level (work once the "${OJS_JOURNAL}" journal is created)
-  submit: `${OJS_BASE}/${OJS_JOURNAL}/about/submissions`,
-  currentIssue: `${OJS_BASE}/${OJS_JOURNAL}/issue/current`,
-  archive: `${OJS_BASE}/${OJS_JOURNAL}/issue/archive`,
+  submit: `${OJS_PUBLIC}/${OJS_JOURNAL}/about/submissions`,
+  currentIssue: `${OJS_PUBLIC}/${OJS_JOURNAL}/issue/current`,
+  archive: `${OJS_PUBLIC}/${OJS_JOURNAL}/issue/archive`,
 };
 
 export const contact = {
