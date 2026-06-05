@@ -1,0 +1,20 @@
+{
+  "name": "AJAM — OJS + DB (Codespaces)",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "forwardPorts": [8080],
+  "portsAttributes": {
+    "8080": {
+      "label": "OJS",
+      "visibility": "public",
+      "onAutoForward": "openBrowser"
+    }
+  },
+  "postCreateCommand": "bash .devcontainer/codespaces-up.sh",
+  "hostRequirements": {
+    "cpus": 2,
+    "memory": "4gb"
+  }
+}
