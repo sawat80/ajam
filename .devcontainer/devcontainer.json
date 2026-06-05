@@ -1,8 +1,10 @@
 {
   "name": "AJAM — OJS + DB (Codespaces)",
-  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20-bookworm",
   "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "moby": false
+    }
   },
   "forwardPorts": [8080],
   "portsAttributes": {
