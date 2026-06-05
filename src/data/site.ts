@@ -40,7 +40,7 @@ export const journal = {
 // the real OJS host once it is deployed (no trailing slash), e.g.
 //   https://ojs.<your-domain>            (OJS at the root of its own host)
 //   https://<your-domain>/ojs            (OJS under a /ojs subpath)
-const OJS_PUBLIC = 'https://sawat80.github.io/ajam';
+const OJS_PUBLIC = 'https://obscure-palm-tree-pqqw74j94w36jx9-8080.app.github.dev';
 const OJS_JOURNAL = 'ajam';
 export const ojs = {
   base: OJS_PUBLIC,
